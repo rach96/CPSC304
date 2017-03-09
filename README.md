@@ -15,7 +15,7 @@ Division of Labour:
 
 Big Picture of Application:
 - Write your ideas here!
-Rachel:
+- Rachel:
 Interface where customers need to log in first after being approved by an admin (Employee)
 Home Page, Page with rates on it, Hours of Operation, Reserve Page and Check-in Page, Contact us page?
   - Home page:

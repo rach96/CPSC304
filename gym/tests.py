@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Customer1
+from .sql_tables import Customer1
 
 # Create your tests here.
 
@@ -12,12 +12,12 @@ from .models import Customer1
 
 class CustomerTestCase(TestCase):
     def setUp(self):
-        Customer1.objects.create(cusID=12345, cusName="Rachel", cusPhoneNumber = 6047256348)
-        Customer1.objects.create(cusID=12346, cusName="Tiff", cusPhoneNumber = 6047253957)
+        Customer1.create(12345, "Rachel", 6047256348)
+        Customer1.create(12346, "Tiff", 6047253957)
 
     def test_animals_can_speak(self):
         """Animals that can speak are correctly identified"""
-        lion = Animal.objects.get(name="lion")
-        cat = Animal.objects.get(name="cat")
-        self.assertEqual(lion.speak(), 'The lion says "roar"')
+        cus1 = Customer1.objects.get(name="Rachel")
+        cus2 = Customer1.objects.get(name="Tiff")
+        self.assertEqual(, 'The lion says "roar"')
         self.assertEqual(cat.speak(), 'The cat says "meow"')

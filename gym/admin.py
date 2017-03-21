@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer1
+from .sql_tables import Customer1
 
 # Register your models here.
 

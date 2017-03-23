@@ -231,19 +231,22 @@ INSERT INTO reservedRoom
     VALUES (8456, 129382, 'Sunday');
 
 
-
+--may nt need this table (no query)
 create table if not exists checkInRoom
     (roomID int not null,
      customerID int not null,
      foreign key (roomID) references room1,
      foreign key (customerID) references customer1);
 
+
+--may nt need this table(no query)
 create table if not exists createOrUpdateAccount
     (customerID int not null,
      accountUsername char(20) null,
      accountPassword char(20) null,
      foreign key (customerID) references customer1);
 
+--may nt need this table(no query)
 create table if not exists recordsTransactionHistory
   (customerID int not null,
    accountUsername char(20) not null,
@@ -251,13 +254,25 @@ create table if not exists recordsTransactionHistory
    THDate text null,
    foreign key (accountUsername) references createOrUpdateAccount);
 
+
+
 create table if not exists employee
     (employeeSSN int not null,
      employeeName char(20) null,
      employeeGender char(20) null,
-     employeeBirthday int null,
+     employeeBirthday text null,
      primary key (employeeSSN));
 
+INSERT INTO employee
+    VALUES (8147564912, 'Amy Tang', 'female', '1966/06/04');
+INSERT INTO employee
+    VALUES (8147135912, 'Ralph Sui', 'male', '1984/06/12');
+INSERT INTO employee
+    VALUES (8147346712, 'Robert King', 'male', '1977/09/20');
+INSERT INTO employee
+    VALUES (8147564346, 'Nichol Smith', 'female', '1990/05/15');
+INSERT INTO employee
+    VALUES (8147534667, 'Sean Mendez', 'male', '1979/07/09');
 
 
 create table if not exists clean
@@ -265,4 +280,6 @@ create table if not exists clean
      employeeTime int null,
      employeeID int not null,
      primary key (employeeRoomID));
+
+
 

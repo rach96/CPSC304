@@ -20,7 +20,33 @@ create table if not exists customer1
      primary key (cusID));
 
  insert into customer1
-     values('1234','Henry',9239203928);
+     values(12345,'Henry Sze',6043269284);
+ insert into customer1
+     values(22345,'John Wai',7788343845);
+ insert into customer1
+     values(32345,'Kelly Yeung',6042351345);
+ insert into customer1
+     values(42345,'Nick Mellon',7782349764);
+ insert into customer1
+     values(52345,'Mark Mitchel',6042453267);
+
+--  below are the athele informations:
+ insert into customer1
+     values(129382, 'Rachel Sand', 7783652753);
+ insert into customer1
+     values(239483, 'Tiffany Pan', 6049863782);
+ insert into customer1
+     values(472839, 'Yoshi Yamamoto', 7786536286);
+ insert into customer1
+     values(123456, 'Andy Yeung', 6048592478);
+ insert into customer1
+     values(123457, 'John Doe', 7789374052);
+
+
+-- need to populate information for member:
+
+
+
 
 create table if not exists customer2
     (cusName char(20) not null,
@@ -30,7 +56,34 @@ create table if not exists customer2
      primary key (cusName));
 
 insert into customer2
-    values('Alice',9283784938,'04:30:9382', 'MontgomeryLane');
+    values('Henry Sze',6043269284,'1978/05/08', '12-321 Beautiful road, Vancouver');
+insert into customer2
+    values('John Wai',7788343845,'1967/08/08', '53-1345 Strong str., Vancouver');
+insert into customer2
+    values('Kelly Yeung',6042351345,'1988/11/06', '7234 Big House Road, Surrey');
+insert into customer2
+    values('Nick Mellon',7782349764,'1977/07/19', '874 Rich People Road, Surrey');
+insert into customer2
+    values('Mark Mitchel',6042453267,'1977/12/29', '235 Older Guy Str. Vancouver');
+
+--  below are the athele informations:
+ insert into customer2
+     values('Rachel Sand', 7783652753, '1985/08/04', '324 Hungry road, Vancouver');
+ insert into customer2
+     values('Tiffany Pan', 6049863782, '1976/07/28', '234 Sushi Str, Surrey');
+ insert into customer2
+     values('Yoshi Yamamoto', 7786536286, '1980/09/10', '7624 Pancake Lane, Richmond');
+ insert into customer2
+     values('Andy Yeung', 6048592478, '1975/04/31', '234-2942 Blueberry Road, Vancouver');
+ insert into customer2
+     values('John Doe', 7789374052, '1980/05/25', '1245 East str, Vancouver');
+
+
+--need to popular information for member:
+
+
+
+
 
 create table if not exists athlete
     (athleteTeam char(20) not null,
@@ -41,12 +94,13 @@ create table if not exists athlete
  insert into athlete
      values('Rangers',129382);
  insert into athlete
-     values('Rangers',239483);
+     values('Eagle',239483);
  insert into athlete
-     values('Rangers',472839);
+     values('Thunder',472839);
  insert into athlete
      values('Tuutuus',123456);
-
+ insert into athlete
+     values('Tuutuus',123457);
 
 create table if not exists member
     (memberID int not null,
@@ -56,9 +110,16 @@ create table if not exists member
      foreign key (memberID) references customer1);
 
  insert into member
-     values(654321,'03:23:49','Party');
+     values(654321,'1978/04/24', 'monthly');
  insert into member
-     values(392837,'02:03:39','Party');
+     values(392837,'1988/04/25','week');
+insert into member
+     values(654124,'1984/05/12','yearly');
+ insert into member
+     values(392764,'1977/03/02','monthly');
+insert into member
+     values(625678,'1990/08/17','week');
+
 
 create table if not exists Equipment_checkIn_reserveOrcancel_return1
     (EquipType char(20) not null,
@@ -67,10 +128,15 @@ create table if not exists Equipment_checkIn_reserveOrcancel_return1
      primary key (EquipType));
 
  insert into Equipment_checkIn_reserveOrcancel_return1
-     values('TennisRacket', 30.20, 39.12);
-
+     values('TennisRacket', 10.00, 39.12);
  insert into Equipment_checkIn_reserveOrcancel_return1
-     values('TennisBall', 30.20, 39.12);
+     values('TennisBall', 3.00, 39.12);
+ insert into Equipment_checkIn_reserveOrcancel_return1
+     values('Basketball', 15.00, 30.25);
+ insert into Equipment_checkIn_reserveOrcancel_return1
+     values('Badminton', 10.00, 50.75);
+ insert into Equipment_checkIn_reserveOrcancel_return1
+     values('Ping Pong', 2.00, 5.25);
 
 create table if not exists Equipment_checkIn_reserveOrcancel_return2
     (EquipID int not null,
@@ -78,6 +144,17 @@ create table if not exists Equipment_checkIn_reserveOrcancel_return2
      EquipCustID int not null,
      primary key (EquipID),
      foreign key (EquipCustID) references customer1);
+
+ insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2355, 'TennisRacket', 129382);
+ insert into Equipment_checkIn_reserveOrcancel_return2
+     values(5432, 'Badminton', 392837);
+ insert into Equipment_checkIn_reserveOrcancel_return2
+     values(3463, 'Ping Pong', 472839);
+ insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2563, 'Badminton', 42345);
+ insert into Equipment_checkIn_reserveOrcancel_return2
+     values(7643, 'Ping Pong', 22345);
 
 create table if not exists room1
     (roomID int not null,

@@ -53,7 +53,8 @@ create table if not exists customer2
      cusPhoneNumber int null,
      cusBirthday text null,
      cusAddress char(20) null,
-     primary key (cusName));
+     primary key (cusName, cusPhoneNumber),
+     foreign key (cusName, cusPhoneNumber) REFERENCES customer1(cusName,cusPhoneNumber));
 
 insert into customer2
     values('Henry Sze',6043269284,'1978/05/08', '12-321 Beautiful road, Vancouver');
@@ -161,30 +162,75 @@ create table if not exists room1
      roomType char(20),
      primary key (roomID));
 
+INSERT INTO room1
+    VALUES (8452, 'Large Gym Room');
+INSERT INTO room1
+    VALUES (8453, 'Small Gym Room');
+INSERT INTO room1
+    VALUES (8454, 'Basketball Room');
+INSERT INTO room1
+    VALUES (8455, 'Tennis Room');
+INSERT INTO room1
+    VALUES (8456, 'Large Gym Room');
+
 create table if not exists room2
     (roomType char(20),
-     roomRate int null,
+     roomRate double null,
      roomSlots int null,
-     roomDamageFee int null,
+     roomDamageFee double null,
      primary key (roomType));
+
+INSERT INTO room2
+    VALUES ('Large Gym Room', 5.00, 15, 10.00);
+INSERT INTO room2
+    VALUES ('Small Gym Room', 5.00, 10, 10.00);
+INSERT INTO room2
+    VALUES ('Tennis Room', 7.00, 4, 20.00);
+INSERT INTO room2
+    VALUES ('Basketball Room', 5.00, 10, 20.00);
+INSERT INTO room2
+    VALUES ('Table Tennis Room', 2.00, 6, 20.00);
 
 create table if not exists returnRooms
     (roomID int not null,
      customerID int not null,
-     roomType char(20),
-     roomSlots int null,
-     roomDamageFee int null,
-     primary key (roomID),
-     foreign key (roomID) references room1);
+     primary key (roomID, customerID),
+     foreign key (roomID) references room1,
+     foreign key (customerID) REFERENCES customer1);
 
-create table if not exists returnOrCancelRoom
+INSERT INTO returnRooms
+    VALUES (8452, 32345);
+INSERT INTO returnRooms
+    VALUES (8453, 12345);
+INSERT INTO returnRooms
+    VALUES (8454, 123456);
+INSERT INTO returnRooms
+    VALUES (8455, 22345);
+INSERT INTO returnRooms
+    VALUES (8456, 129382);
+
+
+
+create table if not exists reservedRoom
     (roomID int not null,
      customerID int not null,
-     roomType char(20),
-     roomSlots int null,
-     roomDamageFee int null,
+     time text NOT NULL,
+     PRIMARY KEY (roomID,customerID),
      foreign key (roomID) references room1,
      foreign key (customerID) references customer1);
+
+INSERT INTO reservedRoom
+    VALUES (8452, 32345, 'Monday');
+INSERT INTO reservedRoom
+    VALUES (8453, 12345, 'Monday');
+INSERT INTO reservedRoom
+    VALUES (8454, 123456, 'Saturday');
+INSERT INTO reservedRoom
+    VALUES (8455, 22345, 'Sunday');
+INSERT INTO reservedRoom
+    VALUES (8456, 129382, 'Sunday');
+
+
 
 create table if not exists checkInRoom
     (roomID int not null,
@@ -211,6 +257,8 @@ create table if not exists employee
      employeeGender char(20) null,
      employeeBirthday int null,
      primary key (employeeSSN));
+
+
 
 create table if not exists clean
     (employeeRoomID int not null,

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query</title>
+</head>
+<body>
+    {% if data %}
+    <ul>
+    {% for row in data %}
+        <li><a href="/gym/{{ query }}/">{{row}}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No data is available.</p>
+    {% endif %}
+</body>
+</html>

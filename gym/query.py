@@ -28,33 +28,41 @@ def my_custom_sql(self):
 
         return rows
 
-def my_sql_query_1(self):
+def my_sql_query_1(self,string9,string99,string999):
     with connection.cursor() as cursor:
         # 1. SELECTION QUERY = Select all the equipment with a specified type and display all tuples
         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
         # NOTE = replace BASKETBALL with whatever the user inputs
-        cursor.execute("SELECT * FROM Equipment_checkIn_reserveOrcancel_return1 WHERE EquipType ='Basketball' ")
+        # string = SELECT * FROM Equipment_checkIn_reserveOrcancel_return1 WHERE EquipType ='Basketball'"
 
-def my_sql_query_2(self):
+        string = "SELECT"
+        string05 = string9 #"*"                                                             #user-selected
+        string1 = " FROM Equipment_checkIn_reserveOrcancel_return1"  #string99??            #user-selected????
+        string2 = " WHERE EquipType = "
+        string3 = string999 #" 'BasketBall'"                                                #user-selected
+        string += string05
+        string += string1
+        string += string2
+        string += string3
+
+        cursor.execute(string)
+
+def my_sql_query_2(self,string9,string99,string999):
     with connection.cursor() as cursor:
         # 1. SELECTION QUERY = Select all the rooms with a specified type and display all tuples
         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
         # NOTE = replace 'Large Gym Room' with whatever the user input
         cursor.execute("SELECT * FROM room1 WHERE roomType = 'Large Gym Room'")
 
-def my_sql_query_3(self):
-    with connection.cursor() as cursor:
-        # 1. SELECTION QUERY = Select all the equipment with a specified type and display EquipRate
-        # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
-        # NOTE = replace BASKETBALL with whatever the user inputs
-        cursor.execute("SELECT EquipRate FROM Equipment_checkIn_reserveOrcancel_return1 WHERE EquipType ='Basketball' ")
-
-def my_sql_query_4(self):
-    with connection.cursor() as cursor:
-        # 1. SELECTION QUERY = Select all the rooms with a specified type and display roomID
-        # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
-        # NOTE = replace 'Large Gym Room' with whatever the user input
-        cursor.execute("SELECT roomID FROM room1 WHERE roomType = 'Large Gym Room'")
+        string = "SELECT"
+        string05 = string9 #"*"                           #user-selected
+        string1 = " FROM room1"                           #user-selected???
+        string2 = " WHERE RoomType = "
+        string3 = string999 # " 'Large Gym Room'"         #user-selected
+        string += string05
+        string += string1
+        string += string2
+        string += string3
 
 def my_sql_query_5(self):
     with connection.cursor() as cursor:
@@ -97,37 +105,63 @@ def my_sql_query_11(self):
         # MIN(Average equipment rate for each equipment type)
         cursor.execute(
             "SELECT MIN(AverageByType) FROM (SELECT AVG(equipRate) AS AverageByType FROM Equipment_checkIn_reserveOrcancel_return1  e1 GROUP BY e1.equipType)")
-def my_sql_query_12(self):
+def my_sql_query_12(self,string9,string99):
     with connection.cursor() as cursor:
         # 6. DELETE WITHOUT CASCADE = Delete a tuple in clean with a given RoomID, time, and employee ID
         # Some input values would fail the cascade specification but others would successfully follow the cascade specification
         # NOTE = replace employeeID, employeeroomID, and employeeTIME with user input
-        cursor.execute(
-            "DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday'")
+        #cursor.execute(
+        #    "DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday'")
 
-def my_sql_query_13(self):
+        string = "DELETE FROM clean WHERE employeeID"
+        string05 = " = "
+        string1 = string9 #"01234"                                  #user-selected
+        string2 = " and employeeroomID = "
+        string3 = string99 #" '01234'"                               #user-selected
+        string += string05
+        string += string1
+        string += string2
+        string += string3
+
+        cursor.execute(string)
+
+def my_sql_query_13(self,string9):
     with connection.cursor() as cursor:
         # 6. DELETE WITH CASCADE = Delete an customer
         # The member table now has the ON DELETE CASCADE restriction
         # If we delete an customer (which is also an athlete), there will be an error
         # cusID is either a cusID taken from member of athlete
-        cursor.execute("DELETE FROM customer1 WHERE cusID = '01234'")
+        #cursor.execute("DELETE FROM customer1 WHERE cusID = '01234'")
 
-def my_sql_query_14(self):
+        string = "DELETE FROM customer1 WHERE cusID"
+        string05 = " = "
+        string1 = string9 #"01234"  # user-selected
+        string += string05
+        string += string1
+
+        cursor.execute(string)
+
+def my_sql_query_14(self,string9):
     with connection.cursor() as cursor:
         # 7. UPDATE = roomRate
         # Implement a constraint using the check statement
-        # Provide an interface for the user to specify some input for the update operation - User picks roomType!
+        # Provide an interface for the user to specify some input for the update operation - User picks roomRate!
         # Some input values would successfully satisfy a constraint while others would fail (roomRate between $0 and $100)
         # Provide an interface for the user to display the relation relation after the operation
         # Update roomRate and ItemID with user's input
-        cursor.execute("Update room2 Set roomRate = '0234' Where roomType = 'Basketball'")
+        #cursor.execute("Update room2 Set roomRate = '0234' Where roomType = 'Basketball'")
 
-def my_sql_query_15(self):
-    with connection.cursor() as cursor:
-        # 7. UPDATE = equipmentRate
-        # Some input values would successfully satisfy a constraint while others would fail (EquipRate between $0 and $100)
-        cursor.execute("Update Equipment_checkIn_reserveOrcancel_return1 Set EquipRate = '0123' Where EquipType = '0123'")
+        string = "Update room2 Set"
+        string05 = " roomRate = "
+        string1 = string9 #"01234"                       # user-selected
+        string2 = " Where roomType = 'Basketball'"
+        string += string05
+        string += string1
+        string += string2
+
+        cursor.execute(string)
+
+#NOTE = THE QUERIES BELOW ARE EXTRA FUNCTIONS I AM CHOOSING NOT TO IMPLEMENT SINCE THEY ARE UNECESSARY FOR THE TIME BEING
 
 
 # def my_sql_query_3(self):
@@ -144,4 +178,24 @@ def my_sql_query_15(self):
 #         # EDIT THIS QUERY BUT TOO TIRED NOW
 #         cursor.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2, customer1 WHERE cusID = Equipment_checkIn_reserveOrcancel_return2.EquipCustID")
 
+
+# def my_sql_query_3(self):
+#     with connection.cursor() as cursor:
+#         # 1. SELECTION QUERY = Select all the equipment with a specified type and display EquipRate
+#         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
+#         # NOTE = replace BASKETBALL with whatever the user inputs
+#         cursor.execute("SELECT EquipRate FROM Equipment_checkIn_reserveOrcancel_return1 WHERE EquipType ='Basketball' ")
+#
+# def my_sql_query_4(self):
+#     with connection.cursor() as cursor:
+#         # 1. SELECTION QUERY = Select all the rooms with a specified type and display roomID
+#         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
+#         # NOTE = replace 'Large Gym Room' with whatever the user input
+#         cursor.execute("SELECT roomID FROM room1 WHERE roomType = 'Large Gym Room'")
+
+# def my_sql_query_15(self):
+#     with connection.cursor() as cursor:
+#         # 7. UPDATE = equipmentRate
+#         # Some input values would successfully satisfy a constraint while others would fail (EquipRate between $0 and $100)
+#         cursor.execute("Update Equipment_checkIn_reserveOrcancel_return1 Set EquipRate = '0123' Where EquipType = '0123'")
 

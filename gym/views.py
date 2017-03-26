@@ -12,12 +12,12 @@ def index(request):
     return HttpResponse("Hello, world. You're at the Awesome Gym.")
 
 def page1(request):
-    return HttpResponse("This is where the aggregations will go")
-    #return render(request, 'gym/page1.html', data)
+    #return HttpResponse("This is where the aggregations will go")
+    return render(request, 'gym/page1.html', data)
 
 def page2(request):
-    return HttpResponse("This is where the projections will go")
-    #return render(request, 'gym/page2.html', data)
+    #return HttpResponse("This is where the projections will go")
+    return render(request, 'gym/page2.html', data)
 
 #testPage
 def viewC(request):
@@ -28,12 +28,12 @@ def viewC(request):
 
 @login_required
 def page3(request):
-    return HttpResponse("This is where we can delete tuples in clean room")
-    # return render(request, 'gym/page3.html', data)
+    #return HttpResponse("This is where we can delete tuples in clean room")
+     return render(request, 'gym/page3.html', data)
 
 @login_required
 def page4(request):
-    return HttpResponse("This is where we can update items OR delete items so that there is a cascade")
-    # return render(request, 'gym/page4.html', data)
+    #return HttpResponse("This is where we can update items OR delete items so that there is a cascade")
+     return render(request, 'gym/page4.html', data)
 
 

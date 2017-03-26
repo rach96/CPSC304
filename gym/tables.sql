@@ -12,6 +12,7 @@ drop table if exists checkInRoom;
 drop table if exists clean;
 drop table if exists createOrUpdateAccount;
 drop table if exists member;
+drop table if exists returnRooms;
 
 create table if not exists customer1
     (cusID int not null,
@@ -219,16 +220,16 @@ create table if not exists reservedRoom
      foreign key (roomID) references room1,
      foreign key (customerID) references customer1);
 
-INSERT INTO reservedRoom
-    VALUES (8452, 32345, 'Monday');
-INSERT INTO reservedRoom
-    VALUES (8453, 12345, 'Monday');
-INSERT INTO reservedRoom
-    VALUES (8454, 123456, 'Saturday');
-INSERT INTO reservedRoom
-    VALUES (8455, 22345, 'Sunday');
-INSERT INTO reservedRoom
-    VALUES (8456, 129382, 'Sunday');
+--INSERT INTO reservedRoom
+--    VALUES (8452, 32345, 'Monday');
+--INSERT INTO reservedRoom
+--    VALUES (8453, 12345, 'Monday');
+--INSERT INTO reservedRoom
+--    VALUES (8454, 123456, 'Saturday');
+--INSERT INTO reservedRoom
+--    VALUES (8455, 22345, 'Sunday');
+--INSERT INTO reservedRoom
+--    VALUES (8456, 129382, 'Sunday');
 
 
 --may nt need this table (no query)

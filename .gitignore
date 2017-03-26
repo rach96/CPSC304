@@ -1,4 +1,7 @@
+.idea/
 .idea/workspace.xml
 .yarnclean
 coverage/
 data/
+CPSC304Project/__pycache__
+gym/__pycache__

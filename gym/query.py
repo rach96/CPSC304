@@ -6,6 +6,14 @@ from django.db import connection
 import argparse
 from django.db import connection, transaction
 
+def dictfetchall(cursor):
+    "Returns all rows from a cursor as a dict"
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+
 def my_custom_sql(self):
     with connection.cursor() as cursor:
 
@@ -69,28 +77,47 @@ def my_sql_query_5(self):
         # 2. JOIN = Get custID’s of customers who booked rooms
         # Provide an interface for the user to choose this query
         cursor.execute("SELECT cusID FROM reservedRoom INNER JOIN customer1 ON reservedRoom.customerID = customer1.cusID INNER JOIN room1 ON reservedRoom.customerID = room1.roomID")
+        results = dictfetchall(cursor)
+        print(results)
+        return results
+
 
 def my_sql_query_6(self):
     with connection.cursor() as cursor:
         # 2. JOIN = Get custID’s and cusName's of customers who booked equipment
         # Provide an interface for the user to choose this query
         cursor.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2 INNER JOIN customer1 ON Equipment_checkIn_reserveOrcancel_return2.EquipCustID = customer1.cusID")
+        results = dictfetchall(cursor)
+        print(results)
+        return results
+
 
 def my_sql_query_7(self):
     with connection.cursor() as cursor:
         # 3. DIVISION = Get all customers who reserved every equipment (change the sql file so that this is the case!)
         # Provide an interface for the user to choose this query
         cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID));")
+        results = dictfetchall(cursor)
+        print(results)
+        return results
+
 
 def my_sql_query_8(self):
     with connection.cursor() as cursor:
         # 4. AGGREGATION = Total # of rooms booked during the week for all customers
         cursor.execute("SELECT Count(*) FROM reservedRoom")
+        results = dictfetchall(cursor)
+        print(results)
+        return results
+
 
 def my_sql_query_9(self):
     with connection.cursor() as cursor:
         # 4. AGGREGATION = Total # of equipment booked during the week for all customers
         cursor.execute("SELECT Count(*) FROM Equipment_checkIn_reserveOrcancel_return2")
+        results = dictfetchall(cursor)
+        print(results)
+        return results
 
 def my_sql_query_10(self):
     with connection.cursor() as cursor:
@@ -99,12 +126,21 @@ def my_sql_query_10(self):
         cursor.execute(
             "SELECT MAX(AverageByType) FROM (SELECT AVG(equipRate) AS AverageByType FROM Equipment_checkIn_reserveOrcancel_return1  e1 GROUP BY e1.equipType)")
 
+        results = dictfetchall(cursor)
+        print(results)
+        return results
+
 def my_sql_query_11(self):
     with connection.cursor() as cursor:
         # 5. NESTED AGGREGATION = Type of Equipment with the LEAST cost
         # MIN(Average equipment rate for each equipment type)
         cursor.execute(
             "SELECT MIN(AverageByType) FROM (SELECT AVG(equipRate) AS AverageByType FROM Equipment_checkIn_reserveOrcancel_return1  e1 GROUP BY e1.equipType)")
+
+        results = dictfetchall(cursor)
+        print(results)
+        return results
+
 def my_sql_query_12(self,string9,string99):
     with connection.cursor() as cursor:
         # 6. DELETE WITHOUT CASCADE = Delete a tuple in clean with a given RoomID, time, and employee ID

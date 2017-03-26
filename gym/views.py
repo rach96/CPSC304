@@ -1,23 +1,26 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.http import HttpResponse
 from django.db import connection
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 
 
-from gym.query import my_custom_sql
+from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7,my_sql_query_6,my_sql_query_5,my_sql_query_8,\
+    my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
 
 def index(request):
     return HttpResponse("Hello, world. You're at the Awesome Gym.")
 
 def page1(request):
     #return HttpResponse("This is where the aggregations will go")
-    data = {}
+    results = my_sql_query_8(request)
+    data = {'results' : results}
+    # render_to_response('page1.html',{'results' : results}, context_instance=RequestContext(request))
     return render(request, 'gym/page1.html', data)
 
 def page2(request):
-    data = {}
+    data = {'request': request}
     #return HttpResponse("This is where the projections will go")
     return render(request, 'gym/page2.html', data)
 

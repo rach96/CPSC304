@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Page 1</title>
+
+
 </head>
 <body>
+       <h2>Results Test</h2>
 
+        <ul>
+            {% for result in results %}
+            <li> {{ result }} </li>
+            {% endfor %}
+
+        </ul>
 </body>
 </html>

@@ -13,9 +13,11 @@ def index(request):
 
 def page1(request):
     #return HttpResponse("This is where the aggregations will go")
+    data = {}
     return render(request, 'gym/page1.html', data)
 
 def page2(request):
+    data = {}
     #return HttpResponse("This is where the projections will go")
     return render(request, 'gym/page2.html', data)
 
@@ -28,12 +30,14 @@ def viewC(request):
 
 @login_required
 def page3(request):
+    data = {}
     #return HttpResponse("This is where we can delete tuples in clean room")
-     return render(request, 'gym/page3.html', data)
+    return render(request, 'gym/page3.html', data)
 
 @login_required
 def page4(request):
+    data = {}
     #return HttpResponse("This is where we can update items OR delete items so that there is a cascade")
-     return render(request, 'gym/page4.html', data)
+    return render(request, 'gym/page4.html', data)
 
 

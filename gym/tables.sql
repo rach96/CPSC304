@@ -15,7 +15,7 @@ drop table if exists member;
 drop table if exists returnRooms;
 
 create table if not exists customer1
-    (cusID int not null,
+     (cusID int not null,
      cusName char(20) null,
      cusPhoneNumber int null,
      primary key (cusID));

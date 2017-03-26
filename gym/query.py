@@ -44,17 +44,17 @@ def my_sql_query_2(self):
 
 def my_sql_query_3(self):
     with connection.cursor() as cursor:
-        # 1. PROJECTION QUERY = View the custIDs and cusNames of all customers that currently booked a room
+        # 1. SELECTION QUERY = Select all the equipment with a specified type and display EquipRate
         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
-        # NOTE = currently nothing is displaying, but that may be due to the data that is currently stored
-        cursor.execute("SELECT cusID, cusName FROM reservedRoom, room1, customer1 WHERE customerID = reservedRoom.customerID and room1.roomID = reservedRoom.customerID")
+        # NOTE = replace BASKETBALL with whatever the user inputs
+        cursor.execute("SELECT EquipRate FROM Equipment_checkIn_reserveOrcancel_return1 WHERE EquipType ='Basketball' ")
 
 def my_sql_query_4(self):
     with connection.cursor() as cursor:
-        # 1. PROJECTION QUERY = View the custIDs and cusNames of all customers that currently booked equipment
+        # 1. SELECTION QUERY = Select all the rooms with a specified type and display roomID
         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
-        # EDIT THIS QUERY BUT TOO TIRED NOW
-        cursor.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2, customer1 WHERE cusID = Equipment_checkIn_reserveOrcancel_return2.EquipCustID")
+        # NOTE = replace 'Large Gym Room' with whatever the user input
+        cursor.execute("SELECT roomID FROM room1 WHERE roomType = 'Large Gym Room'")
 
 def my_sql_query_5(self):
     with connection.cursor() as cursor:
@@ -70,9 +70,9 @@ def my_sql_query_6(self):
 
 def my_sql_query_7(self):
     with connection.cursor() as cursor:
-        # 3. DIVISION = Get all athletes who reserved every unique equipment (with a certain type) during this week
+        # 3. DIVISION = Get all customers who reserved every equipment (change the sql file so that this is the case!)
         # Provide an interface for the user to choose this query
-        cursor.execute("SELECT ...")
+        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID));")
 
 def my_sql_query_8(self):
     with connection.cursor() as cursor:
@@ -86,16 +86,17 @@ def my_sql_query_9(self):
 
 def my_sql_query_10(self):
     with connection.cursor() as cursor:
-        # 5. NESTED AGGREGATION = Type of Equipment with the MOST cost
+        # 5. NESTED AGGREGATION = average for each group and then finds either the minimum or maximum across all those averages
+        # MAX(Average equipment rate for each equipment type)
         cursor.execute(
-            "SELECT e.equipType FROM Equipment_checkIn_reserveOrcancel_return1 e  WHERE e.equipRate = (SELECT MAX(e1.equipRate) From Equipment_checkIn_reserveOrcancel_return1  e1) GROUP BY e.equipType")
+            "SELECT MAX(AverageByType) FROM (SELECT AVG(equipRate) AS AverageByType FROM Equipment_checkIn_reserveOrcancel_return1  e1 GROUP BY e1.equipType)")
 
 def my_sql_query_11(self):
     with connection.cursor() as cursor:
         # 5. NESTED AGGREGATION = Type of Equipment with the LEAST cost
+        # MIN(Average equipment rate for each equipment type)
         cursor.execute(
-            "SELECT e.equipType FROM Equipment_checkIn_reserveOrcancel_return1 e WHERE e.equipRate = (SELECT MIN(e1.equipRate) From Equipment_checkIn_reserveOrcancel_return1  e1) GROUP BY e.equipType")
-
+            "SELECT MIN(AverageByType) FROM (SELECT AVG(equipRate) AS AverageByType FROM Equipment_checkIn_reserveOrcancel_return1  e1 GROUP BY e1.equipType)")
 def my_sql_query_12(self):
     with connection.cursor() as cursor:
         # 6. DELETE WITHOUT CASCADE = Delete a tuple in clean with a given RoomID, time, and employee ID
@@ -106,15 +107,18 @@ def my_sql_query_12(self):
 
 def my_sql_query_13(self):
     with connection.cursor() as cursor:
-        # 6. DELETE WITH CASCADE = Delete an item from items (and delete any trace of it with a given ItemID)
-        cursor.execute("DELETE ...")
+        # 6. DELETE WITH CASCADE = Delete an customer
+        # The member table now has the ON DELETE CASCADE restriction
+        # If we delete an customer (which is also an athlete), there will be an error
+        # cusID is either a cusID taken from member of athlete
+        cursor.execute("DELETE FROM customer1 WHERE cusID = '01234'")
 
 def my_sql_query_14(self):
     with connection.cursor() as cursor:
         # 7. UPDATE = roomRate
         # Implement a constraint using the check statement
         # Provide an interface for the user to specify some input for the update operation - User picks roomType!
-        # Some input values would successfully satisfy a constraint while others would fail
+        # Some input values would successfully satisfy a constraint while others would fail (roomRate between $0 and $100)
         # Provide an interface for the user to display the relation relation after the operation
         # Update roomRate and ItemID with user's input
         cursor.execute("Update room2 Set roomRate = '0234' Where roomType = 'Basketball'")
@@ -122,4 +126,22 @@ def my_sql_query_14(self):
 def my_sql_query_15(self):
     with connection.cursor() as cursor:
         # 7. UPDATE = equipmentRate
+        # Some input values would successfully satisfy a constraint while others would fail (EquipRate between $0 and $100)
         cursor.execute("Update Equipment_checkIn_reserveOrcancel_return1 Set EquipRate = '0123' Where EquipType = '0123'")
+
+
+# def my_sql_query_3(self):
+#     with connection.cursor() as cursor:
+#         # 1. PROJECTION QUERY = View the custIDs and cusNames of all customers that currently booked a room
+#         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
+#         # NOTE = currently nothing is displaying, but that may be due to the data that is currently stored
+#         cursor.execute("SELECT cusID, cusName FROM reservedRoom, room1, customer1 WHERE customerID = reservedRoom.customerID and room1.roomID = reservedRoom.customerID")
+#
+# def my_sql_query_4(self):
+#     with connection.cursor() as cursor:
+#         # 1. PROJECTION QUERY = View the custIDs and cusNames of all customers that currently booked equipment
+#         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
+#         # EDIT THIS QUERY BUT TOO TIRED NOW
+#         cursor.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2, customer1 WHERE cusID = Equipment_checkIn_reserveOrcancel_return2.EquipCustID")
+
+

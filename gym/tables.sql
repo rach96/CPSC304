@@ -14,6 +14,8 @@ drop table if exists createOrUpdateAccount;
 drop table if exists member;
 drop table if exists returnRooms;
 
+PRAGMA foreign_keys = ON;
+
 create table if not exists customer1
      (cusID int not null,
      cusName char(20) null,
@@ -45,8 +47,6 @@ create table if not exists customer1
 
 
 -- need to populate information for member:
-
-
 
 
 create table if not exists customer2
@@ -84,9 +84,6 @@ insert into customer2
 --need to popular information for member:
 
 
-
-
-
 create table if not exists athlete
     (athleteTeam char(20) not null,
      athleteID int not null,
@@ -109,7 +106,7 @@ create table if not exists member
      memberRenewalTime text not null,
      memberType char(20) not null,
      primary key (memberID),
-     foreign key (memberID) references customer1);
+     foreign key (memberID) references customer1 ON DELETE CASCADE);
 
  insert into member
      values(654321,'1978/04/24', 'monthly');
@@ -125,7 +122,7 @@ insert into member
 
 create table if not exists Equipment_checkIn_reserveOrcancel_return1
     (EquipType char(20) not null,
-     EquipRate double not null,
+     EquipRate double not null CHECK(EquipRate > 0 & EquipRate < 100),
      EquipDamageFee double not null,
      primary key (EquipType));
 
@@ -176,7 +173,7 @@ INSERT INTO room1
 
 create table if not exists room2
     (roomType char(20),
-     roomRate double null,
+     roomRate double null CHECK(roomRate > 0 & roomRate < 100),
      roomSlots int null,
      roomDamageFee double null,
      primary key (roomType));
@@ -281,6 +278,5 @@ create table if not exists clean
      employeeTime int null,
      employeeID int not null,
      primary key (employeeRoomID));
-
 
 

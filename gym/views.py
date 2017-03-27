@@ -10,7 +10,7 @@ from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7
     my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the Awesome Gym.")
+    return HttpResponse("<h1>Hello, world. You're at the Awesome Gym.</h1>")
 
 #Selection and Projection Queries
 def page1(request):

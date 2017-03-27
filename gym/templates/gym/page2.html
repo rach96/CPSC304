@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <title>Page 2</title>
 </head>
-<body>
-    <h2> Join Query: Get custID’s and cusNames of customers who booked rooms</h2>
+<body style="background-color:whitesmoke;">
+    <h1> Join Query: Get custID’s and cusNames of customers who booked rooms</h1>
+    <br>
+    <h2 style="font-family: Arial;">Select the query you would like to see</h2>
+    <form>
+        <input type="radio" name="JoinQuery" value="Option 1">Option 1: Get custID’s and cusName's of customers who booked equipment<br>
+    </form>
+    <br>
+    <button type="submit" value="Submit">Submit</button>
+    <hr>
         <ul>
-            <h3>Help me get rid of the comma
-
+            <p>
             {% for result in results2 %}
                     <li> {{ result }}</li>
             {% endfor %}
-
-            </h3>
+            </p>
         </ul>
 </body>
 </html>

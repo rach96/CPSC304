@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <title>Employee Page 3</title>
 </head>
-<body>
-        <h2>Division Query: Get all customers who reserved every equipment</h2>
+<body style="background-color:whitesmoke;">
+        <h1>Division Query: Get all customers who reserved every equipment</h1>
         <h4>THIS QUERY IS NOT WORKING SINCE THERE IS A PROBLEM WITH THE SQL</h4>
+        <br>
+        <h2 style="font-family: Arial;">Select the query you would like to see</h2>
+        <form>
+            <input type="radio" name="DivisionQuery" value="Option 1">Option 1: Get all customers (cusID) who reserved every equipment<br>
+        </form>
+        <br>
+        <button type="submit" value="Submit">Submit</button>
+        <hr>
         <ul>
             <h3>
             {% for result in results %}

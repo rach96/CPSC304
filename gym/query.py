@@ -96,7 +96,7 @@ def my_sql_query_7(self):
     with connection.cursor() as cursor:
         # 3. DIVISION = Get all customers who reserved every equipment (change the sql file so that this is the case!)
         # Provide an interface for the user to choose this query
-        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID));")
+        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID))")
         results = dictfetchall(cursor)
         print(results)
         return results
@@ -106,7 +106,7 @@ def my_sql_query_8(self):
     with connection.cursor() as cursor:
         # 4. AGGREGATION = Total # of rooms booked during the week for all customers
         cursor.execute("SELECT Count(*) FROM reservedRoom")
-        results = dictfetchall(cursor)
+        results = cursor.fetchall()
         print(results)
         return results
 
@@ -146,20 +146,8 @@ def my_sql_query_12(self,string9,string99):
         # 6. DELETE WITHOUT CASCADE = Delete a tuple in clean with a given RoomID, time, and employee ID
         # Some input values would fail the cascade specification but others would successfully follow the cascade specification
         # NOTE = replace employeeID, employeeroomID, and employeeTIME with user input
-        #cursor.execute(
-        #    "DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday'")
-
-        string = "DELETE FROM clean WHERE employeeID"
-        string05 = " = "
-        string1 = string9 #"01234"                                  #user-selected
-        string2 = " and employeeroomID = "
-        string3 = string99 #" '01234'"                               #user-selected
-        string += string05
-        string += string1
-        string += string2
-        string += string3
-
-        cursor.execute(string)
+        cursor.execute(
+           "DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday'")
 
 def my_sql_query_13(self,string9):
     with connection.cursor() as cursor:

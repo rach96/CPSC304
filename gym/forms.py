@@ -17,9 +17,9 @@ OPTIONS2 = (
 
 class MyFormPage1(forms.Form):
     EquipType = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage1Part1)
-    EquipType2 = forms.BooleanField(required=False, label="Return Equpment Type");
-    EquipRate = forms.BooleanField(required=False, label="Return Equpment Rate");
-    EquipDamageFee = forms.BooleanField(required=False, label="Return Equpment Damage Fee");
+    EquipType2 = forms.BooleanField(required=False, label="Return Equipment Type");
+    EquipRate = forms.BooleanField(required=False, label="Return Equipment Rate");
+    EquipDamageFee = forms.BooleanField(required=False, label="Return Equipment Damage Fee");
 
 OptionsPage2 = (
     ("Option 11","Get custID’s and cusName's of customers who booked equipment"),

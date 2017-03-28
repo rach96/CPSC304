@@ -2,10 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        li a.active {
+            color: white;
+            background-color: #00cfce;
+        }
+    </style>
     <title>Page 2</title>
 </head>
 <body style="background-color:whitesmoke;">
     <!--<form method="post">-->
+    <ul>
+            <li><a href="../page1">Selection</a></li>
+            <li><a class="active" href="../page2">Join</a></li>
+            <li><a href="../page3">Division</a></li>
+            <li><a href="../page4">Aggregation</a></li>
+            <li><a href="../page5">Nested Group</a></li>
+            <li><a href="../page6">Delete</a></li>
+            <li><a href="../page7">Update</a></li>
+        </ul>
     <h1> Join Query: Get custID’s and cusNames of customers who booked rooms</h1>
     <br>
     <h2 style="font-family: Arial;">Select the query you would like to see</h2>

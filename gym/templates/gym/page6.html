@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            top: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        li a.active {
+            color: white;
+            background-color: #00cfce;
+        }
+    </style>
+    <title>Employee Page 6</title>
+</head>
+<body style="background-color:whitesmoke;">
+    <ul>
+            <li><a href="../page1">Selection</a></li>
+            <li><a href="../page2">Join</a></li>
+            <li><a href="../page3">Division</a></li>
+            <li><a href="../page4">Aggregation</a></li>
+            <li><a href="../page5">Nested Group</a></li>
+            <li><a class="active" href="../page6">Delete</a></li>
+            <li><a href="../page7">Update</a></li>
+        </ul>
+    <h1>Delete operation: Delete an customer with a given cusID </h1>
+    <br>
+    <div id="Delete-on-cascade">
+    <h2 style="font-family: Arial;">Query 1: select the customer id you want to delete</h2>
+    <form method="post" action=""> {% csrf_token %}
+        <input type="checkbox" name="cusId" value="13948">13948<br>
+        <input type="checkbox" name="cusId" value="03948">03948<br>
+        <input type="checkbox" name="cusId" value="03948">03948<br>
+        <br>
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+    </div>
+    <hr>
+    <div id="Delete without cascade">
+    <h2 style="font-family: Arial;">Query 2: select the query you want to execute</h2>
+    <form method="post" action=""> {% csrf_token %}
+        <input type="radio" name="DeleteQuery" value="Option 1">Option 1: DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday<br>
+        <br>
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+    </div>
+
+</body>
+</html>

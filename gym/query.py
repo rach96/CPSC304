@@ -36,7 +36,7 @@ def my_custom_sql(self):
 
         return rows
 
-def my_sql_query_1(self,string9,string99,string999):
+def my_sql_query_1(self,string9,string999):
     with connection.cursor() as cursor:
         # 1. SELECTION QUERY = Select all the equipment with a specified type and display all tuples
         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
@@ -45,7 +45,7 @@ def my_sql_query_1(self,string9,string99,string999):
 
         string = "SELECT"
         string05 = string9 #"*"                                                             #user-selected
-        string1 = " FROM Equipment_checkIn_reserveOrcancel_return1"  #string99??            #user-selected????
+        string1 = " FROM Equipment_checkIn_reserveOrcancel_return1"                         #user-selected????
         string2 = " WHERE EquipType = "
         string3 = string999 #" 'BasketBall'"                                                #user-selected
         string += string05
@@ -55,22 +55,25 @@ def my_sql_query_1(self,string9,string99,string999):
 
         cursor.execute(string)
 
-def my_sql_query_2(self,string9,string99,string999):
+def my_sql_query_2(self,string9,string999):
     with connection.cursor() as cursor:
         # 1. SELECTION QUERY = Select all the rooms with a specified type and display all tuples
         # Pick one query of this category and provide an interface for the user to specify the selection condition and the attributes to be returned.
         # NOTE = replace 'Large Gym Room' with whatever the user input
-        cursor.execute("SELECT * FROM room1 WHERE roomType = 'Large Gym Room'")
+        #cursor.execute("SELECT * FROM room1 WHERE roomType = 'Large Gym Room'")
 
         string = "SELECT"
-        string05 = string9 #"*"                           #user-selected
-        string1 = " FROM room1"                           #user-selected???
+        string05 = string9                                #user-selected
+        string1 = " FROM room1"
         string2 = " WHERE RoomType = "
-        string3 = string999 # " 'Large Gym Room'"         #user-selected
+        string3 = string999                               #user-selected
         string += string05
         string += string1
         string += string2
         string += string3
+        print("function being passed in")
+        print(string)
+        cursor.execute(string)
 
 def my_sql_query_5(self):
     with connection.cursor() as cursor:
@@ -106,7 +109,7 @@ def my_sql_query_8(self):
     with connection.cursor() as cursor:
         # 4. AGGREGATION = Total # of rooms booked during the week for all customers
         cursor.execute("SELECT Count(*) FROM reservedRoom")
-        results = cursor.fetchall()
+        results = dictfetchall(cursor)
         print(results)
         return results
 

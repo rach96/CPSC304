@@ -7,7 +7,13 @@
 <body style="background-color:whitesmoke;">
        <h1>Selection Query: Select all the equipment with a specified type and display selected tuples</h1>
        <br>
-       <div id = "EquipType">
+       {% if previous_success %}
+        <li>Successful Query</li>
+        {% endif %}
+        <form action="" method="post"> {% csrf_token %}
+            {{ form.as_p }}
+
+{% comment %}       <div id = "EquipType">
            <h2 style="font-family: Arial;">Select the equipment type you would like to rent</h2>
             <form>
                 <input type="radio" name="EquipType" value="TennisRacket"> Tennis Racket<br>
@@ -21,17 +27,27 @@
         <div id="ViewOptions">
             <h2 style="font-family: Arial;">Select the properties you would like to see</h2>
             <form>
-                <input type="checkbox" name="EquipType"> Equipment Type<br>
-                <input type="checkbox" name="EquipRate"> Equipment Rate<br>
-                <input type="checkbox" name="EquipDamageFee"> Equipment Damage Fee<br>
+                <input type="checkbox" name="EquipType2"> Equipment Type <br>
+                <input type="checkbox" name="EquipRate"> Equipment Rate <br>
+                <input type="checkbox" name="EquipDamageFee"> Equipment Damage Fee <br>
             </form>
-        </div>
-       <br>
-       <button type="submit" value="Submit">Submit</button>
+        </div>{% endcomment %}
+
+            <br>
+            <button type="submit" value="Submit">Submit</button>
+        </form>
+
+       <form action="" method="post"> {% csrf_token %}
        <hr>
         <h2>Question: How many rooms are booked during the week for all customers?</h2>
         <ul>
-            <p> {{results.0.0}} </p>
+            <p>
+            {% for result in results %}
+                    <li> {{ result }}</li>
+            {% endfor %}
+            </p>
         </ul>
+
+        </form>
 </body>
 </html>

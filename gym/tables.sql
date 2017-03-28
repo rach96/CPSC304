@@ -55,7 +55,7 @@ create table if not exists customer2
      cusBirthday text null,
      cusAddress char(20) null,
      primary key (cusName, cusPhoneNumber),
-     foreign key (cusName, cusPhoneNumber) REFERENCES customer1(cusName,cusPhoneNumber));
+     foreign key (cusName, cusPhoneNumber) REFERENCES customer1);
 
 insert into customer2
     values('Henry Sze',6043269284,'1978/05/08', '12-321 Beautiful road, Vancouver');
@@ -152,8 +152,7 @@ create table if not exists Equipment_checkIn_reserveOrcancel_return2
      values(3463, 'Ping Pong', 472839);
  insert into Equipment_checkIn_reserveOrcancel_return2
      values(2563, 'Badminton', 42345);
- insert into Equipment_checkIn_reserveOrcancel_return2
-     values(7643, 'Ping Pong', 22345);
+
 
 create table if not exists room1
     (roomID int not null,

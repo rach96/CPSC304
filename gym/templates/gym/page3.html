@@ -9,19 +9,23 @@
         <h4>THIS QUERY IS NOT WORKING SINCE THERE IS A PROBLEM WITH THE SQL</h4>
         <br>
         <h2 style="font-family: Arial;">Select the query you would like to see</h2>
-        <form>
-            <input type="radio" name="DivisionQuery" value="Option 1">Option 1: Get all customers (cusID) who reserved every equipment<br>
-        </form>
-        <br>
+        <form method="post" action=""> {% csrf_token %}
+            {# <input type="radio" name="DivisionQuery" value="Option 1">Option 1: Get all customers (cusID) who reserved every equipment<br> #}
+            {{ form.as_p }}
+
         <button type="submit" value="Submit">Submit</button>
-        <hr>
+        </form>
+
+        <form method="post" action=""> {% csrf_token %}
         <ul>
             <h3>
+            <h5>Display Result:</h5>
             {% for result in results %}
                 <li> {{ result }}</li>
             {% endfor %}
 
             </h3>
         </ul>
+        </form>
 </body>
 </html>

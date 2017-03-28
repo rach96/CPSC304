@@ -8,11 +8,25 @@
     <h1>Nested Aggregation with Group-by: Average equipment rate for each equipment type</h1>
     <br>
     <h2 style="font-family: Arial;">Select the query you would like to see</h2>
-    <form>
-        <input type="radio" name="GroupByQuery" value="Option 1">Option 1: MAX(Average equipment rate for each equipment type)<br>
-        <input type="radio" name="GroupByQuery" value="Option 2">Option 2: MIN(Average equipment rate for each equipment type)<br>
+    <form method="post" action=""> {% csrf_token %}
+        {% comment %}<input type="radio" name="GroupByQuery" value="Option 1">Option 1: MAX(Average equipment rate for each equipment type)<br>
+        <input type="radio" name="GroupByQuery" value="Option 2">Option 2: MIN(Average equipment rate for each equipment type)<br>{% endcomment %}
+        {{ form.as_p }}
+
+        <br>
+        <button type="submit" value="Submit">Submit</button>
     </form>
-    <br>
-    <button type="submit" value="Submit">Submit</button>
+
+    <form action="" method="post"> {% csrf_token %}
+
+        <ul>
+            <p>
+            {% for result in results4 %}
+                    <li> {{ result }}</li>
+            {% endfor %}
+            </p>
+        </ul>
+    </form>
+
 </body>
 </html>

@@ -52,6 +52,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'CPSC304Project.urls'
+LOGIN_REDIRECT_URL = 'homepage'
+LOGIN_URL = 'login'
 
 TEMPLATES = [
     {

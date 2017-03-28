@@ -21,14 +21,16 @@ from .forms import MyFormPage2
 from .forms import MyFormPage3
 from .forms import MyFormPage4
 from .forms import MyFormPage5
+from .forms import UserLoginForm
 
 
 from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7,my_sql_query_6,my_sql_query_5,my_sql_query_8,\
     my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
 
-def index(request):
+def homepage(request):
     #my_custom_sql(request)
-    return HttpResponse("<h1>Hello, world. You're at the Awesome Gym.</h1>")
+    data = {}
+    return render(request, 'gym/homepage.html',data)
 
 #Selection and Projection Queries
 def page1(request):
@@ -150,4 +152,14 @@ def page7(request):
     data = {'results': results}
     return render(request, 'gym/page7.html', data)
 
-
+# Use Django's built in login system but redirect to the homepage if already
+# logged in
+def user_login(request, **kwargs):
+    form = UserLoginForm(request.POST)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        view_login(request,user)
+        print(request.user_is_authenticated())
+    return render(request, "homepage.html", {"form":form})

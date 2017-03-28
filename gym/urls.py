@@ -1,9 +1,11 @@
 from django.conf.urls import url
+from gym.views import (user_login)
 
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.homepage, name='homepage'),
+    url(r'^login/$', user_login, name='login'),
     url(r'^viewC/$', views.viewC, name='viewC'),
     url(r'^page1/$', views.page1, name='Page1'),
     url(r'^page2/$', views.page2, name='Page2'),

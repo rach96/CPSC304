@@ -1,10 +1,16 @@
 import os, django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myapp.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "./settings.py")
 django.setup()
+
 
 from django.db import connection
 import argparse
 from django.db import connection, transaction
+
+import sqlite3
+dbName = 'database.sqlite'
+conn = sqlite3.connect(dbName)
+curs = conn.cursor()
 
 def dictfetchall(cursor):
     "Returns all rows from a cursor as a dict"
@@ -15,7 +21,7 @@ def dictfetchall(cursor):
     ]
 
 def my_custom_sql(self):
-    with connection.cursor() as cursor:
+    with curs as cursor:
 
         #parser = argparse.ArgumentParser(description='Executes a raw database script on a Django project.')
         #parser.add_argument('filenames', action='append', metavar='FILE', type=str,
@@ -86,11 +92,17 @@ def my_sql_query_5(self):
 
 
 def my_sql_query_6(self):
-    with connection.cursor() as cursor:
-        # 2. JOIN = Get custID’s and cusName's of customers who booked equipment
-        # Provide an interface for the user to choose this query
-        cursor.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2 INNER JOIN customer1 ON Equipment_checkIn_reserveOrcancel_return2.EquipCustID = customer1.cusID")
-        results = dictfetchall(cursor)
+    with connection.cursor() as curs:
+        # curs.execute("SELECT * FROM sqlite_master WHERE type='table'")
+        # curs.execute("CREATE TABLE TEST(cusName char(20) not null, cusPhoneNumber int null, cusBirthday text null)")
+        # curs.execute("SELECT * FROM TEST")
+        # results = dictfetchall(curs)
+        # print(results)
+        # return results
+        # # 2. JOIN = Get custID’s and cusName's of customers who booked equipment
+        # # Provide an interface for the user to choose this query
+        curs.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2 INNER JOIN customer1 ON Equipment_checkIn_reserveOrcancel_return2.EquipCustID = customer1.cusID")
+        results = dictfetchall(curs)
         print(results)
         return results
 
@@ -99,7 +111,8 @@ def my_sql_query_7(self):
     with connection.cursor() as cursor:
         # 3. DIVISION = Get all customers who reserved every equipment (change the sql file so that this is the case!)
         # Provide an interface for the user to choose this query
-        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID))")
+        #cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID))")
+        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE NOT EXISTS (SELECT * FROM customer1 c2 WHERE e1.cusID = c1.cusID and e1.cusID = c1.cusID))")
         results = dictfetchall(cursor)
         print(results)
         return results

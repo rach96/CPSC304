@@ -72,22 +72,17 @@
     <div id="Delete-on-cascade">
     <h2 style="font-family: Arial;">Query 1: select the customer id you want to delete</h2>
     <form method="post" action=""> {% csrf_token %}
-        <input type="checkbox" name="cusId" value="13948">13948<br>
+        {% comment %}<input type="checkbox" name="cusId" value="13948">13948<br>
         <input type="checkbox" name="cusId" value="03948">03948<br>
-        <input type="checkbox" name="cusId" value="03948">03948<br>
-        <br>
-        <button type="submit" value="Submit">Submit</button>
-    </form>
-    </div>
-    <br>
-    <div id="Delete without cascade">
-    <h2 style="font-family: Arial;">Query 2: select the query you want to execute</h2>
-    <form method="post" action=""> {% csrf_token %}
-        <input type="radio" name="DeleteQuery" value="Option 1">Option 1: DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday<br>
-        <br>
-        <button type="submit" value="Submit">Submit</button>
-    </form>
-    </div>
+        <input type="checkbox" name="cusId" value="03993">03993<br>{% endcomment %}
 
+{#        <input type="radio" name="DeleteQuery" value="Option 1">Option 1: DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday<br>#}
+        {{ form.as_p }}
+        <br>
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+    </div>
+    </form>
+    </div>
 </body>
 </html>

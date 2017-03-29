@@ -22,7 +22,7 @@ from .forms import MyFormPage3
 from .forms import MyFormPage4
 from .forms import MyFormPage5
 from .forms import UserLoginForm
-
+from .forms import MyFormPage6
 
 from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7,my_sql_query_6,my_sql_query_5,my_sql_query_8,\
     my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
@@ -34,26 +34,19 @@ def homepage(request):
 
 #Selection and Projection Queries
 def page1(request):
-    #results = my_sql_query_8(request)
-    #data = {'results': results}
     form = MyFormPage1(request.POST)
     data = {}
     Select = ""
     if request.method == "POST":
             if form.is_valid():
                 EquipType = request.POST.get('EquipType', False)
-                #if "EquipType2" in request.GET:
                 if not request.POST.get("EquipType2", None) == None:
-                #if request.POST.get("EquipType2", False) == "EquipType2":
                     Select += " EquipType"
                     print(Select)
                 if not request.POST.get("EquipRate", None) == None:
-                #if request.POST.get("EquipRate", False) == "EquipRate":
                     Select += " , EquipRate"
                     print(Select)
-                #if request.POST["EquipDamageFee"]:
                 if not request.POST.get("EquipDamageFee", None) == None:
-                #if request.POST.get("EquipDamageFee", False) == "EquipDamageFee":
                     Select += " , EquipDamageFee"
                     print(Select)
             print("these are the things in select")
@@ -76,6 +69,7 @@ def page2(request):
                 results2 = my_sql_query_6(request)
                 data = {'results2': results2}
             return render(request, 'gym/page2.html', data)
+    print({'form': form})
     return render(request, 'gym/page2.html', {'form':form})
 
 
@@ -90,7 +84,8 @@ def page3(request):
                 results = my_sql_query_7(request)
                 data = {'results': results}
             return render(request, 'gym/page3.html', data)
-    return render(request, 'gym/page3.html', {'form':form})
+    print({'form':form})
+    return render(request, 'gym/page3.html', {'form': form})
 
 #Aggregation Query
 def page4(request):
@@ -138,15 +133,22 @@ def viewC(request):
 # this is where we link the html to our app. where we put REST
 
 #Delete Operation
-@login_required
+#@login_required
 def page6(request):
-    results = my_sql_query_13(request)           #OPTION 1 = DELETE WITH CASCADE
-    results2 = my_sql_query_12(request)          #OPTION 2 = DELETE WITHOUT CASCADE
-    data = {'results': results}
-    return render(request, 'gym/page6.html', data)
+    form = MyFormPage6(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            DeleteQuery = request.POST["DeleteQuery"]
+            if DeleteQuery == "Option 6":
+                CustomerToDelete = request.POST["CustomerToDelete"]
+                results = my_sql_query_13(request,CustomerToDelete)           #OPTION 1 = DELETE WITH CASCADE
+                print(results)
+                data = {'results': results}
+                return render(request, 'gym/page5.html', data)
+    return render(request, 'gym/page6.html', {'form':form})
 
 #Update Operation
-@login_required
+#@login_required
 def page7(request):
     results = my_sql_query_14(request)
     data = {'results': results}

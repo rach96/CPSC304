@@ -72,3 +72,17 @@ OptionsPage5 = (
 
 class MyFormPage5(forms.Form):
     NestedAggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage5, required=True)
+
+OptionsPage6Part1 = (
+    ("Option 3", "EmployeeID = 13948"),
+    ("Option 4", "EmployeeID = 03948"),
+    ("Option 5", "EmployeeID = 03993")
+)
+
+OptionsPage6Part2 = (
+    ("Option 6", "Stop this employee from the room:")
+)
+
+class MyFormPage6(forms.Form):
+    CustomerToDelete = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part1)
+    DeleteQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part2)

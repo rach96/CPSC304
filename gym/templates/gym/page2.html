@@ -67,6 +67,18 @@
                                           text-align: center;
                                           padding: 14px 16px;
                                           text-decoration: none;">Update</a></li>
+            <li style=" float: left;">
+                <a href="../login" style="display: block;
+                                          color: #666;
+                                          text-align: center;
+                                          padding: 14px 16px;
+                                          text-decoration: none;">Login</a></li>
+            <li style=" float: left;">
+                <a href="../logout" style="display: block;
+                                          color: #666;
+                                          text-align: center;
+                                          padding: 14px 16px;
+                                          text-decoration: none;">Logout</a></li>
         </ul>
     <h1> Join Query: Get custID’s and cusNames of customers who booked rooms</h1>
     <br>
@@ -74,7 +86,6 @@
         <form method="post" action=""> {% csrf_token %}
 {#            <input type="radio" name="JoinQuery" value="Option 11">Option 1: Get custID’s and cusName's of customers who booked equipment>#}
             {{ form.as_p }}
-            {{ form.errors }}
 
             {# </br> #}
             <button type="submit" value="Submit" onclick="return confirm('Are you sure?')">Submit</button>

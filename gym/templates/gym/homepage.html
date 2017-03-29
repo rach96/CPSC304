@@ -66,10 +66,24 @@
                                           text-align: center;
                                           padding: 14px 16px;
                                           text-decoration: none;">Update</a></li>
+            <li style=" float: left;">
+                <a href="../login" style="display: block;
+                                          color: #666;
+                                          text-align: center;
+                                          padding: 14px 16px;
+                                          text-decoration: none;">Login</a></li>
+            <li style=" float: left;">
+                <a href="../logout" style="display: block;
+                                          color: #666;
+                                          text-align: center;
+                                          padding: 14px 16px;
+                                          text-decoration: none;">Logout</a></li>
         </ul>
 </body>
     <title>HomePage</title>
     <h1>Welcome to the Awesome Gym!</h1>
+
+    <img src="https://garfield.com/img/logo@2x.png" height=400px>
 
     <form method="post" action=""> {% csrf_token %}
         {{ form }}

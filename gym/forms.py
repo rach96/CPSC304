@@ -38,7 +38,7 @@ OPTIONS2 = (
 )
 
 class MyFormPage1(forms.Form):
-    EquipType = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage1Part1)
+    EquipType = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage1Part1,label="Select one of the following equipment types:")
     EquipType2 = forms.BooleanField(required=False, label="Return Equipment Type");
     EquipRate = forms.BooleanField(required=False, label="Return Equipment Rate");
     EquipDamageFee = forms.BooleanField(required=False, label="Return Equipment Damage Fee");

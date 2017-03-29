@@ -36,7 +36,6 @@ def homepage(request):
 #Selection and Projection Queries
 def page1(request):
     form = MyFormPage1(request.POST)
-    data = {}
     Select = ""
     if request.method == "POST":
             if form.is_valid():
@@ -62,8 +61,9 @@ def page1(request):
             results = my_sql_query_1(request,Select,EquipType)
             data = {'results': results}
             return render(request, 'gym/page1.html', data)
-    print(Select)
-    return render(request, 'gym/page1.html', {'form':form})
+    else:
+        print(Select)
+        return render(request, 'gym/page1.html', {'form':form})
 
 #Join Queries
 def page2(request):

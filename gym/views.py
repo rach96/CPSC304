@@ -12,7 +12,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import login as view_login
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.views.generic.edit import CreateView
 import json
@@ -134,7 +134,7 @@ def viewC(request):
 
 
 #Delete Operation
-#@login_required
+@login_required
 def page6(request):
     form = MyFormPage6(request.POST)
     if request.method == "POST":
@@ -149,7 +149,7 @@ def page6(request):
     return render(request, 'gym/page6.html', {'form':form})
 
 #Update Operation
-#@login_required
+@login_required
 def page7(request):
     form = MyFormPage7(request.POST)
     if request.method == "POST":
@@ -167,10 +167,23 @@ def page7(request):
 # logged in
 def user_login(request, **kwargs):
     form = UserLoginForm(request.POST)
+    next = request.GET.get('next', '/homepage/')
     if form.is_valid():
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
+        #username = request.POST['username']
+        #password = request.POST['password']
         user = authenticate(username=username, password=password)
-        view_login(request,user)
-        print(request.user_is_authenticated())
-    return render(request, "homepage.html", {"form":form})
+
+        if user is not None:
+            if user.is_active:
+                view_login(request,user)
+                return redirect(request.GET.get('next',settings.LOGIN_REDIRECT_URL))
+
+        else:
+            return HttpResponseRedirect(settings.LOGIN_URL)
+
+
+def Logout(request):
+    logout(request)
+    return HttpResponseRedirect(settings.LOGIN_URL)

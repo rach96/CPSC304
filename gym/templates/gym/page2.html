@@ -74,6 +74,7 @@
         <form method="post" action=""> {% csrf_token %}
 {#            <input type="radio" name="JoinQuery" value="Option 11">Option 1: Get custID’s and cusName's of customers who booked equipment>#}
             {{ form.as_p }}
+            {{ form.errors }}
 
             {# </br> #}
             <button type="submit" value="Submit" onclick="return confirm('Are you sure?')">Submit</button>

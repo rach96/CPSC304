@@ -74,6 +74,7 @@
         {% endif %}
         <form action="" method="post"> {% csrf_token %}
             {{ form.as_p }}
+            {{ form.errors }}
 
 {% comment %}       <div id = "EquipType">
            <h2 style="font-family: Arial;">Select the equipment type you would like to rent</h2>

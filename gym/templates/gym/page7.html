@@ -76,6 +76,7 @@
         <input type="checkbox" name="roomRate" value="3">$3<br>
         <input type="checkbox" name="roomRate" value="4">$4<br>{% endcomment %}
         {{ form.as_p }}
+        {{ form.errors }}
         <br>
         <button type="submit" value="Submit">Submit</button>
     </form>

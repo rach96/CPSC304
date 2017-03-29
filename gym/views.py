@@ -155,7 +155,7 @@ def page7(request):
     if request.method == "POST":
         if form.is_valid():
             UpdateQuery = request.POST["UpdateQuery"]
-            if UpdateQuery == "Option6":
+            if UpdateQuery == "Option 7":
                 ToUpdate = request.POST.get('ToUpdate', False)
                 results = my_sql_query_14(request,ToUpdate)
                 print(results)

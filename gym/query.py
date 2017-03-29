@@ -209,13 +209,13 @@ def my_sql_query_14(self,string9):
         #cursor.execute("Update room2 Set roomRate = '0234' Where roomType = 'Basketball'")
 
         string = "Update room2 Set"
-        string05 = " roomRate = "
+        string05 = " roomRate = " + str(string9) + " Where roomType = 'Basketball'"
         string1 = string9 #"01234"                       # user-selected
-        string2 = " Where roomType = 'Basketball'"
+        string2 = "Where roomType = 'Basketball'"
         string += string05
-        string += string1
-        string += string2
-
+        #string += string1
+        #string += string2
+        print(string)
         cursor.execute(string)
 
         results = dictfetchall(cursor)

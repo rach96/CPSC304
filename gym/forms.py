@@ -24,17 +24,17 @@ class UserLoginForm(forms.Form):
         return super(UserLoginForm, self.clean(*args,**kwargs))
 
 OptionsPage1Part1 = (
-    ("TennisRacket", "Tennis Racket"),
-    ("TennisBall", "Tennis Ball"),
-    ("BasketBall", "Basket Ball"),
-    ("Badminton", "Badminton"),
-    ("Ping Pong", "Ping Pong")
+    ('TennisRacket', "Tennis Racket"),
+    ('TennisBall', "Tennis Ball"),
+    ('BasketBall', "Basket Ball"),
+    ('Badminton', "Badminton"),
+    ('Ping Pong', "Ping Pong")
 )
 
 OPTIONS2 = (
-    ("EquipType", "Equipment Type"),
-    ("EquipRate","Equipment Rate"),
-    ("EquipDamageFee","Equipment Damage Fee")
+    ('EquipType', "Equipment Type"),
+    ('EquipRate',"Equipment Rate"),
+    ('EquipDamageFee',"Equipment Damage Fee")
 )
 
 class MyFormPage1(forms.Form):
@@ -99,5 +99,5 @@ OptionsPage7Part2 = (
 )
 
 class MyFormPage7(forms.Form):
-    TpUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1, required=True)
-    UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2, required=True)
+    TpUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1)
+    UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2)

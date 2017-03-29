@@ -45,10 +45,16 @@ def page1(request):
                     Select += " EquipType"
                     print(Select)
                 if not request.POST.get("EquipRate", None) == None:
-                    Select += " , EquipRate"
+                    if Select == "":
+                        Select += "EquipRate"
+                    else:
+                        Select += " , EquipRate"
                     print(Select)
                 if not request.POST.get("EquipDamageFee", None) == None:
-                    Select += " , EquipDamageFee"
+                    if Select == "":
+                        Select += "EquipDamageFee"
+                    else:
+                        Select += " , EquipDamageFee"
                     print(Select)
             print("these are the things in select")
 
@@ -139,7 +145,7 @@ def page6(request):
                 results = my_sql_query_13(request,CustomerToDelete)
                 print(results)
             data = {'results': results}
-            return render(request, 'gym/page5.html', data)
+            return render(request, 'gym/page6.html', data)
     return render(request, 'gym/page6.html', {'form':form})
 
 #Update Operation
@@ -150,8 +156,9 @@ def page7(request):
         if form.is_valid():
             UpdateQuery = request.POST["UpdateQuery"]
             if UpdateQuery == "Option6":
-                ToUpdate = request.Post.get('ToUpdate', False)
+                ToUpdate = request.POST.get('ToUpdate', False)
                 results = my_sql_query_14(request,ToUpdate)
+                print(results)
             data = {'results': results}
             return render(request, 'gym/page7.html', data)
     return render(request, 'gym/page7.html', {'form':form})

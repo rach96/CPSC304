@@ -52,14 +52,18 @@ def my_sql_query_1(self,string9,string999):
         string = "SELECT"
         string05 = string9 #"*"                                                             #user-selected
         string1 = " FROM Equipment_checkIn_reserveOrcancel_return1"                         #user-selected????
-        string2 = " WHERE EquipType = "
-        string3 = string999 #" 'BasketBall'"                                                #user-selected
+        string2 = " WHERE EquipType = '"
+        string3 = string999 + "'"#" 'BasketBall'"                                                #user-selected
         string += string05
         string += string1
         string += string2
         string += string3
-
+        print(string)
         cursor.execute(string)
+
+        results = dictfetchall(cursor)
+        print(results)
+        return results
 
 def my_sql_query_2(self,string9,string999):
     with connection.cursor() as cursor:
@@ -80,6 +84,10 @@ def my_sql_query_2(self,string9,string999):
         print("function being passed in")
         print(string)
         cursor.execute(string)
+
+        results = dictfetchall(cursor)
+        print(results)
+        return results
 
 def my_sql_query_5(self):
     with connection.cursor() as cursor:
@@ -165,6 +173,10 @@ def my_sql_query_12(self,string9,string99):
         cursor.execute(
            "DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday'")
 
+        results = dictfetchall(cursor)
+        print(results)
+        return results
+
 def my_sql_query_13(self,string9):
     with connection.cursor() as cursor:
         # 6. DELETE WITH CASCADE = Delete an customer
@@ -181,6 +193,10 @@ def my_sql_query_13(self,string9):
 
         print(string)
         cursor.execute(string)
+
+        results = dictfetchall(cursor)
+        print(results)
+        return results
 
 def my_sql_query_14(self,string9):
     with connection.cursor() as cursor:
@@ -201,6 +217,10 @@ def my_sql_query_14(self,string9):
         string += string2
 
         cursor.execute(string)
+
+        results = dictfetchall(cursor)
+        print(results)
+        return results
 
 #NOTE = THE QUERIES BELOW ARE EXTRA FUNCTIONS I AM CHOOSING NOT TO IMPLEMENT SINCE THEY ARE UNECESSARY FOR THE TIME BEING
 

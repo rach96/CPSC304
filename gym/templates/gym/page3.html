@@ -74,13 +74,15 @@
             {# <input type="radio" name="DivisionQuery" value="Option 1">Option 1: Get all customers (cusID) who reserved every equipment<br> #}
                 {{ form.as_p }}
 
-                <button type="submit" value="Submit">Submit</button>
-            </form>
+            {# </br> #}
+            <button type="submit" value="Submit" onclick="return confirm('Are you sure?')">Submit</button>
+           {# <hr> #}
+        </form>
 
         <form method="post" action=""> {% csrf_token %}
         <ul>
             <p>
-            {% for result in results2 %}
+            {% for result in results %}
                     <li> {{ result }}</li>
             {% endfor %}
             </p>

@@ -51,7 +51,7 @@ class MyFormPage2(forms.Form):
     JoinQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage2, required=True)
 
 OptionsPage3 = (
-    ("Option 10", "Get all customers who reserved every equipment")
+    ("Option 10", "Get all customers who reserved every equipment"),
 )
 
 class MyFormPage3(forms.Form):
@@ -74,15 +74,30 @@ class MyFormPage5(forms.Form):
     NestedAggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage5, required=True)
 
 OptionsPage6Part1 = (
-    ("Option 3", "EmployeeID = 13948"),
-    ("Option 4", "EmployeeID = 03948"),
-    ("Option 5", "EmployeeID = 03993")
+    ("13948", "EmployeeID = 13948"),
+    ("03948", "EmployeeID = 03948"),
+    ("03993", "EmployeeID = 03993"),
 )
 
 OptionsPage6Part2 = (
-    ("Option 6", "Stop this employee from the room:")
+    ("Option 6", "Stop this employee from cleaning the room:"),
 )
 
 class MyFormPage6(forms.Form):
     CustomerToDelete = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part1)
     DeleteQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part2)
+
+OptionsPage7Part1 = (
+    ("200", "$200"),
+    ("49", "$49"),
+    ("29", "$29"),
+    ("39", "$39"),
+)
+
+OptionsPage7Part2 = (
+    ("Option6", "I want to update"),
+)
+
+class MyFormPage7(forms.Form):
+    TpUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1, required=True)
+    UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2, required=True)

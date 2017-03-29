@@ -112,7 +112,7 @@ def my_sql_query_7(self):
         # 3. DIVISION = Get all customers who reserved every equipment (change the sql file so that this is the case!)
         # Provide an interface for the user to choose this query
         #cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID))")
-        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE NOT EXISTS (SELECT * FROM customer1 c2 WHERE e1.cusID = c1.cusID and e1.cusID = c1.cusID))")
+        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE NOT EXISTS (SELECT * FROM customer1 c2 WHERE e1.EquipCustID = c1.cusID and e1.EquipCustID = c2.cusID))")
         results = dictfetchall(cursor)
         print(results)
         return results
@@ -179,6 +179,7 @@ def my_sql_query_13(self,string9):
         string += string05
         string += string1
 
+        print(string)
         cursor.execute(string)
 
 def my_sql_query_14(self,string9):

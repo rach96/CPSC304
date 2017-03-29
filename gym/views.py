@@ -23,6 +23,7 @@ from .forms import MyFormPage4
 from .forms import MyFormPage5
 from .forms import UserLoginForm
 from .forms import MyFormPage6
+from .forms import MyFormPage7
 
 from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7,my_sql_query_6,my_sql_query_5,my_sql_query_8,\
     my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
@@ -61,6 +62,7 @@ def page1(request):
 #Join Queries
 def page2(request):
     form = MyFormPage2(request.POST)
+    print(form)
     data = {}
     if request.method == 'POST':
         if form.is_valid():
@@ -76,7 +78,6 @@ def page2(request):
 #Division Queries
 def page3(request):
     form = MyFormPage3(request.POST)
-    data = {}
     if request.method == "POST":
         if form.is_valid():
             DivisionQuery = request.POST["DivisionQuery"]
@@ -96,12 +97,8 @@ def page4(request):
             AggregationQuery = request.POST["AggregationQuery"]
             if AggregationQuery == "Option 41":
                 results3 = my_sql_query_8(request)  # OPTION 1
-                print("Option1 was selected")
-                print(results3)
             if AggregationQuery == "Option 42":
                 results3 = my_sql_query_9(request)  # OPTION 2
-                print("Option2 was selected")
-                print(results3)
             data = {'results3': results3}
             return render(request, 'gym/page4.html', data)
     return render(request, 'gym/page4.html', {'form':form})
@@ -115,12 +112,9 @@ def page5(request):
             NestedAggregationQuery = request.POST["NestedAggregationQuery"]
             if NestedAggregationQuery == "Option 31":
                 results4 = my_sql_query_10(request)  # OPTION 1
-                print("Option1 was selected")
-                print(results4)
             if NestedAggregationQuery == "Option 32":
                 results4 = my_sql_query_11(request)  # OPTION 2
-                print("Option2 was selected")
-                print
+
             data = {'results4': results4}
             return render(request, 'gym/page5.html', data)
     return render(request, 'gym/page5.html', {'form':form})
@@ -132,6 +126,7 @@ def viewC(request):
     return render(request, 'gym/viewC.html', data)
 # this is where we link the html to our app. where we put REST
 
+
 #Delete Operation
 #@login_required
 def page6(request):
@@ -140,19 +135,26 @@ def page6(request):
         if form.is_valid():
             DeleteQuery = request.POST["DeleteQuery"]
             if DeleteQuery == "Option 6":
-                CustomerToDelete = request.POST["CustomerToDelete"]
-                results = my_sql_query_13(request,CustomerToDelete)           #OPTION 1 = DELETE WITH CASCADE
+                CustomerToDelete = request.POST.get('CustomerToDelete', False)
+                results = my_sql_query_13(request,CustomerToDelete)
                 print(results)
-                data = {'results': results}
-                return render(request, 'gym/page5.html', data)
+            data = {'results': results}
+            return render(request, 'gym/page5.html', data)
     return render(request, 'gym/page6.html', {'form':form})
 
 #Update Operation
 #@login_required
 def page7(request):
-    results = my_sql_query_14(request)
-    data = {'results': results}
-    return render(request, 'gym/page7.html', data)
+    form = MyFormPage7(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            UpdateQuery = request.POST["UpdateQuery"]
+            if UpdateQuery == "Option6":
+                ToUpdate = request.Post.get('ToUpdate', False)
+                results = my_sql_query_14(request,ToUpdate)
+            data = {'results': results}
+            return render(request, 'gym/page7.html', data)
+    return render(request, 'gym/page7.html', {'form':form})
 
 # Use Django's built in login system but redirect to the homepage if already
 # logged in

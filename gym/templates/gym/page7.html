@@ -71,10 +71,11 @@
     <br>
     <h2 style="font-family: Arial;">Query: select the updated roomRate for Basketball Room</h2>
     <form method="post" action=""> {% csrf_token %}
-        <input type="checkbox" name="roomRate" value="200">$200<br>
+        {% comment %}<input type="checkbox" name="roomRate" value="200">$200<br>
         <input type="checkbox" name="roomRate" value="49">$49<br>
         <input type="checkbox" name="roomRate" value="3">$3<br>
-        <input type="checkbox" name="roomRate" value="4">$4<br>
+        <input type="checkbox" name="roomRate" value="4">$4<br>{% endcomment %}
+        {{ form.as_p }}
         <br>
         <button type="submit" value="Submit">Submit</button>
     </form>

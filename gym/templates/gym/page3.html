@@ -1,95 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <style>
-        li a:hover:not(.active) {
-            background-color: #ddd;
-        }
-    </style>
+{% extends 'gym/base.html' %}
+
+
+{% block head %}
     <title>Employee Page 3</title>
-</head>
-<body style="background-color:whitesmoke;">
-        <ul style="list-style-type: none;
-            margin: 0;
-            padding: 0;
-            top: 0;
-            overflow: hidden;
-            border: 1px solid #e7e7e7;
-            background-color: #f3f3f3;">
-            <li style=" float: left;">
-                <a href="../" style="display: block;
-                                     color: #666;
-                                     text-align: center;
-                                     padding: 14px 16px;
-                                     text-decoration: none;">Home</a></li>
-            <li style=" float: left;">
-                <a href="../page1" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Selection</a></li>
-            <li style=" float: left;">
-                <a href="../page2" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Join</a></li>
-            <li style=" float: left;">
-                <a class="active" href="../page3" style="display: block;
-                                          color: white;
-                                          background-color: #00cfce;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Division</a></li>
-            <li style=" float: left;">
-                <a href="../page4" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Aggregation</a></li>
-            <li style=" float: left;">
-                <a href="../page5" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Nested Group</a></li>
-            <li style=" float: left;">
-                <a href="../page6" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Delete</a></li>
-            <li style=" float: left;">
-                <a href="../page7" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Update</a></li>
-            <li style=" float: left;">
-                <a href="../login" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Login</a></li>
-            <li style=" float: left;">
-                <a href="../logout" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Logout</a></li>
-        </ul>
+{% endblock %}
+
+
+{% block body %}
         <h1>Division Query: Get all customers who reserved every equipment</h1>
         <br>
         <h2 style="font-family: Arial;">Select the query you would like to see</h2>
             <form method="post" action=""> {% csrf_token %}
-            {# <input type="radio" name="DivisionQuery" value="Option 1">Option 1: Get all customers (cusID) who reserved every equipment<br> #}
                 {{ form.as_p }}
                 {{ form.errors }}
 
-            {# </br> #}
             <button type="submit" value="Submit" onclick="return confirm('Are you sure?')">Submit</button>
-           {# <hr> #}
         </form>
 
         <form method="post" action=""> {% csrf_token %}
@@ -101,5 +26,4 @@
             </p>
         </ul>
         </form>
-</body>
-</html>
+{% endblock %}

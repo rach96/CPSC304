@@ -17,17 +17,17 @@
             <div class="container-fluid">
 
             <ul class="nav navbar-nav">
-                <li {% if request.resolver_match.url_name == 'homepage' %}class="active"{% endif %}><a href="/" >Home</a></li>
+                <li><a href="/homepage">Home</a></li>
                 <li><a href="/page1">Selection</a></li>
-{#                <li {% if request.resolver_match.url_name == 'page1' %}class="active"{% endif %}><a href="/page1">Selection</a></li>#}
-                <li {% if request.resolver_match.url_name == 'page2' %}class="active"{% endif %}><a href="/page2" >Join</a></li>
-                <li {% if request.resolver_match.url_name == 'page3' %}class="active"{% endif %}><a href="/page3" >Division</a></li>
-                <li {% if request.resolver_match.url_name == 'page4' %}class="active"{% endif %}><a href="/page4" >Aggregation</a></li>
-                <li {% if request.resolver_match.url_name == 'page5' %}class="active"{% endif %}><a href="/page5" >Nested Aggregation</a></li>
-                <li {% if request.resolver_match.url_name == 'page6' %}class="active"{% endif %}><a href="/page6" >Delete</a></li>
-                <li {% if request.resolver_match.url_name == 'page7' %}class="active"{% endif %}><a href="/page7" >Update</a></li>
-                <li {% if request.resolver_match.url_name == 'login' %}class="active"{% endif %}><a href="/login" >Login</a></li>
-                <li {% if request.resolver_match.url_name == 'logout' %}class="active"{% endif %}><a href="/logout" >Logout</a></li>
+                <li><a href="/page2">Join</a></li>
+                <li><a href="/page3">Division</a></li>
+                <li><a href="/page4">Aggregation</a></li>
+                <li><a href="/page5">Nested Aggregation</a></li>
+                <li><a href="/page6">Delete Without Cascade</a></li>
+                <li><a href="/page8">Delete On Cascade</a></li>
+                <li><a href="/page7">Update</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/logout">Logout</a></li>
 
             </ul>
          </div>
@@ -37,7 +37,10 @@
     </div>
 
     <style>
-
+    h1 {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 30px;
+    }
     </style>
 
     </body>

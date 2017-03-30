@@ -101,3 +101,18 @@ OptionsPage7Part2 = (
 class MyFormPage7(forms.Form):
     ToUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1)
     UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2)
+
+OptionsPage8 = (
+    ('13948', "CustomerID = 13948"),
+    ('03948', "CustomerID = 03948"),
+    ('03993', "CustomerID = 03993"),
+)
+
+OptionsPage8Part2 = (
+    ("Option 12", "I want to delete the customer"),
+)
+
+class MyFormPage8(forms.Form):
+    CustomerToDelete2 = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8)
+    DeleteOnCascadeQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8Part2)
+

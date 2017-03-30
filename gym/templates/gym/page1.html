@@ -8,19 +8,15 @@
 {% block body %}
 
         <h1>Selection Query: Select all the equipment with a specified type and display selected tuples</h1>
-       <br>
-
-    {% if previous_success %}
-        <li>Successful Query</li>
-        {% endif %}
-        <form action="" method="post"> {% csrf_token %}
-            {{ form.as_p }}
-            {{ form.errors }}
+        <br>
+            <form action="" method="post"> {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.errors }}
 
 
-            <br>
-            <button type="submit" value="Submit">Submit</button>
-        </form>
+                <br>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
 
        <form action="" method="post"> {% csrf_token %}
        <br>

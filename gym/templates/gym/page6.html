@@ -6,14 +6,21 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Delete operation: Delete an customer with a given cusID </h1>
+    <h1>Delete operation: Delete an employee with a given ID </h1>
     <br>
     <div id="Delete-on-cascade">
-    <h2 style="font-family: Arial;">Query 1: select the customer id you want to delete</h2>
+    <h2 style="font-family: Arial;">Query 1: select the employee id you want to delete from clean</h2>
     <form method="post" action=""> {% csrf_token %}
         {{ form.as_p }}
         <br>
         <button type="submit" value="Submit">Submit</button>
+    </form>
+    <form action="" method="post"> {% csrf_token %}
+
+        {% for result in results %}
+            {{ result }}
+        {% endfor %}
+
     </form>
     </div>
 {% endblock %}

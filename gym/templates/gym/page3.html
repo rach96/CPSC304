@@ -7,17 +7,16 @@
 
 
 {% block body %}
-        <h1>Division Query: Get all customers who reserved every equipment</h1>
-        <br>
-        <h2 style="font-family: Arial;">Select the query you would like to see</h2>
-            <form method="post" action=""> {% csrf_token %}
-                {{ form.as_p }}
-                {{ form.errors }}
+    <h1>Division Query: Get all customers who reserved every equipment</h1>
+    <br>
+    <h2 style="font-family: Arial;">Select the query you would like to see</h2>
+        <form method="post" action=""> {% csrf_token %}
+            {{ form.as_p }}
 
             <button type="submit" value="Submit" onclick="return confirm('Are you sure?')">Submit</button>
         </form>
 
-        <form method="post" action=""> {% csrf_token %}
+    <form method="post" action=""> {% csrf_token %}
         <ul>
             <p>
             {% for result in results %}
@@ -25,5 +24,5 @@
             {% endfor %}
             </p>
         </ul>
-        </form>
+    </form>
 {% endblock %}

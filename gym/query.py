@@ -91,7 +91,7 @@ def my_sql_query_2(self,string9,string999):
 
 def my_sql_query_5(self):
     with connection.cursor() as cursor:
-        # 2. JOIN = Get custID’s of customers who booked rooms
+        # 2. JOIN = Get custID's of customers who booked rooms
         # Provide an interface for the user to choose this query
         cursor.execute("SELECT cusID FROM reservedRoom INNER JOIN customer1 ON reservedRoom.customerID = customer1.cusID INNER JOIN room1 ON reservedRoom.customerID = room1.roomID")
         results = dictfetchall(cursor)
@@ -107,7 +107,7 @@ def my_sql_query_6(self):
         # results = dictfetchall(curs)
         # print(results)
         # return results
-        # # 2. JOIN = Get custID’s and cusName's of customers who booked equipment
+        # 2. JOIN = Get custID's of customers who booked rooms
         # # Provide an interface for the user to choose this query
         curs.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2 INNER JOIN customer1 ON Equipment_checkIn_reserveOrcancel_return2.EquipCustID = customer1.cusID")
         results = dictfetchall(curs)
@@ -172,6 +172,7 @@ def my_sql_query_12(self,string9,string99):
         # NOTE = replace employeeID, employeeroomID, and employeeTIME with user input
         cursor.execute(
            "DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday'")
+        cursor.execute("SELECT * FROM clean")
 
         results = dictfetchall(cursor)
         print(results)
@@ -191,8 +192,11 @@ def my_sql_query_13(self,string9):
         string += string05
         string += string1
 
+        resultString = "SELECT * FROM customer1"
+
         print(string)
         cursor.execute(string)
+        cursor.execute(resultString)
 
         results = dictfetchall(cursor)
         print(results)
@@ -217,6 +221,7 @@ def my_sql_query_14(self,string9):
         #string += string2
         print(string)
         cursor.execute(string)
+        cursor.execute("SELECT * FROM room2")
 
         results = dictfetchall(cursor)
         print(results)

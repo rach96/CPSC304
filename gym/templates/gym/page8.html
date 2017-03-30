@@ -2,13 +2,14 @@
 
 
 {% block head %}
-    <title>Employee Page 7</title>
+    <title>Employee Page 8</title>
 {% endblock %}
 
 {% block body %}
-    <h1>Update operation:  Update roomRate of the Basketball Room</h1>
+    <h1>Delete operation: Delete an customer with a given cusID </h1>
     <br>
-    <h2 style="font-family: Arial;">Query: select the updated roomRate for Basketball Room</h2>
+    <div id="Delete-on-cascade">
+    <h2 style="font-family: Arial;">Query 1: select the customer id you want to delete</h2>
     <form method="post" action=""> {% csrf_token %}
         {{ form.as_p }}
         <br>
@@ -18,9 +19,10 @@
         <ul>
             <p>
             {% for result in results %}
-                    <li> {{ result }}</li>
+                <li> {{ result }}</li>
             {% endfor %}
             </p>
         </ul>
-    </form>
+        </form>
+    </div>
 {% endblock %}

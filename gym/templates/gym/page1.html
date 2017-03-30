@@ -1,112 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <style>
-        li a:hover:not(.active) {
-            background-color: #ddd;
-        }
-    </style>
-    <title>Page 1</title>
-</head>
-<body style="background-color:whitesmoke;">
-        <ul style="list-style-type: none;
-            margin: 0;
-            padding: 0;
-            top: 0;
-            overflow: hidden;
-            border: 1px solid #e7e7e7;
-            background-color: #f3f3f3;">
-            <li style=" float: left;">
-                <a href="../" style="display: block;
-                                     color: #666;
-                                     text-align: center;
-                                     padding: 14px 16px;
-                                     text-decoration: none;">Home</a></li>
-            <li style=" float: left;">
-                <a class="active" href="../page1" style="display: block;
-                                                        color: white;
-                                                        text-align: center;
-                                                        padding: 14px 16px;
-                                                        background-color: #00cfce;
-                                                        text-decoration: none;">Selection</a></li>
-            <li style=" float: left;">
-                <a href="../page2" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Join</a></li>
-            <li style=" float: left;">
-                <a href="../page3" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Division</a></li>
-            <li style=" float: left;">
-                <a href="../page4" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Aggregation</a></li>
-            <li style=" float: left;">
-                <a href="../page5" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Nested Group</a></li>
-            <li style=" float: left;">
-                <a href="../page6" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Delete</a></li>
-            <li style=" float: left;">
-                <a href="../page7" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Update</a></li>
-            <li style=" float: left;">
-                <a href="../login" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Login</a></li>
-            <li style=" float: left;">
-                <a href="../logout" style="display: block;
-                                          color: #666;
-                                          text-align: center;
-                                          padding: 14px 16px;
-                                          text-decoration: none;">Logout</a></li>
-        </ul>
-       <h1>Selection Query: Select all the equipment with a specified type and display selected tuples</h1>
+{% extends 'gym/base.html' %}
+
+
+{% block head %}
+    <title>Employee Page 1</title>
+{% endblock %}
+
+{% block body %}
+
+        <h1>Selection Query: Select all the equipment with a specified type and display selected tuples</h1>
        <br>
-       {% if previous_success %}
+
+    {% if previous_success %}
         <li>Successful Query</li>
         {% endif %}
         <form action="" method="post"> {% csrf_token %}
             {{ form.as_p }}
             {{ form.errors }}
 
-{% comment %}       <div id = "EquipType">
-           <h2 style="font-family: Arial;">Select the equipment type you would like to rent</h2>
-            <form>
-                <input type="radio" name="EquipType" value="TennisRacket"> Tennis Racket<br>
-                <input type="radio" name="EquipType" value="TennisBall"> Tennis Ball<br>
-                <input type="radio" name="EquipType" value="BasketBall"> Basketball<br>
-                <input type="radio" name="EquipType" value="Badminton"> Badminton<br>
-                <input type="radio" name="EquipType" value="Ping Pong"> Ping Pong
-            </form>
-       </div>
-        <hr>
-        <div id="ViewOptions">
-            <h2 style="font-family: Arial;">Select the properties you would like to see</h2>
-            <form>
-                <input type="checkbox" name="EquipType2"> Equipment Type <br>
-                <input type="checkbox" name="EquipRate"> Equipment Rate <br>
-                <input type="checkbox" name="EquipDamageFee"> Equipment Damage Fee <br>
-            </form>
-        </div>{% endcomment %}
 
             <br>
             <button type="submit" value="Submit">Submit</button>
@@ -117,12 +27,41 @@
         <h2>Question: How many rooms are booked during the week for all customers?</h2>
         <ul>
             <p>
+
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>john@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>Mary</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             {% for result in results %}
-                    <li> {{ result }}</li>
+                <li> {{ result }}</li>
             {% endfor %}
             </p>
         </ul>
 
         </form>
-</body>
-</html>
+{% endblock %}

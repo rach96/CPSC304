@@ -209,9 +209,9 @@ def my_sql_query_14(self,string9):
         #cursor.execute("Update room2 Set roomRate = '0234' Where roomType = 'Basketball'")
 
         string = "Update room2 Set"
-        string05 = " roomRate = " + str(string9) + " Where roomType = 'Basketball'"
+        string05 = " roomRate = " + (string9) + " Where roomType = 'Basketball Room'"
         string1 = string9 #"01234"                       # user-selected
-        string2 = "Where roomType = 'Basketball'"
+        string2 = "Where roomType = 'Basketball Room'"
         string += string05
         #string += string1
         #string += string2

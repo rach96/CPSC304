@@ -299,3 +299,4 @@ create table if not exists clean
      employeeID int not null,
      primary key (employeeRoomID));
 
+Update room2 Set roomRate = 30000 Where roomType = 'Basketball'

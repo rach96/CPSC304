@@ -88,10 +88,10 @@ class MyFormPage6(forms.Form):
     DeleteQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part2)
 
 OptionsPage7Part1 = (
-    ('200', "$200"),
-    ('49', "$49"),
-    ('29', "$29"),
-    ('39', "$39"),
+    (200.00, "$200"),
+    (49.00, "$49"),
+    (29.00, "$29"),
+    (39.00, "$39"),
 )
 
 OptionsPage7Part2 = (

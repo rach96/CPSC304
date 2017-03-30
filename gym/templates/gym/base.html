@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css'>
+        <link rel="stylesheet" href="css/custom.css">
+        <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+        {% block head %}
+        {% endblock %}
+
+    </head>
+    <body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+            <ul class="nav navbar-nav">
+                <li {% if request.resolver_match.url_name == 'homepage' %}class="active"{% endif %}><a href="/" >Home</a></li>
+                <li><a href="/page1">Selection</a></li>
+{#                <li {% if request.resolver_match.url_name == 'page1' %}class="active"{% endif %}><a href="/page1">Selection</a></li>#}
+                <li {% if request.resolver_match.url_name == 'page2' %}class="active"{% endif %}><a href="/page2" >Join</a></li>
+                <li {% if request.resolver_match.url_name == 'page3' %}class="active"{% endif %}><a href="/page3" >Division</a></li>
+                <li {% if request.resolver_match.url_name == 'page4' %}class="active"{% endif %}><a href="/page4" >Aggregation</a></li>
+                <li {% if request.resolver_match.url_name == 'page5' %}class="active"{% endif %}><a href="/page5" >Nested Aggregation</a></li>
+                <li {% if request.resolver_match.url_name == 'page6' %}class="active"{% endif %}><a href="/page6" >Delete</a></li>
+                <li {% if request.resolver_match.url_name == 'page7' %}class="active"{% endif %}><a href="/page7" >Update</a></li>
+                <li {% if request.resolver_match.url_name == 'login' %}class="active"{% endif %}><a href="/login" >Login</a></li>
+                <li {% if request.resolver_match.url_name == 'logout' %}class="active"{% endif %}><a href="/logout" >Logout</a></li>
+
+            </ul>
+         </div>
+        </nav>
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    <style>
+
+    </style>
+
+    </body>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</html>

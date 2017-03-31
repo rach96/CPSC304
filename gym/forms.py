@@ -104,9 +104,9 @@ class MyFormPage7(forms.Form):
     UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2, label="")
 
 OptionsPage8 = (
-    ('654321', "Member with CustomerID = 654321"),
-    ('392837', "Member with CustomerID = 392837"),
-    ('472839', "Athlete with CustomerID = 472839"),
+    ('654321', "Member with CustomerID = 654321, CustomerName = Herb Derp"),
+    ('392837', "Member with CustomerID = 392837, CustomerName = Tiffany Lin"),
+    ('472839', "Athlete with CustomerID = 472839, CustomerName = Yoshi Yamamoto"),
 )
 
 

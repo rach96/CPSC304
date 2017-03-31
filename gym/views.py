@@ -5,6 +5,7 @@ from django.db import connection
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response,redirect
 from django.template import RequestContext
+from django.db import IntegrityError
 
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
@@ -24,6 +25,7 @@ from .forms import MyFormPage5
 from .forms import UserLoginForm
 from .forms import MyFormPage6
 from .forms import MyFormPage7
+from .forms import MyFormPage8
 
 from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7,my_sql_query_6,my_sql_query_5,my_sql_query_8,\
     my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
@@ -68,14 +70,13 @@ def page1(request):
 #Join Queries
 def page2(request):
     form = MyFormPage2(request.POST)
-    print(form)
     data = {}
     if request.method == 'POST':
         if form.is_valid():
             JoinQuery = request.POST["JoinQuery"]
             if JoinQuery == "Option 11":
-                results2 = my_sql_query_6(request)
-                data = {'results2': results2}
+                results = my_sql_query_6(request)
+                data = {'results': results}
             return render(request, 'gym/page2.html', data)
     print({'form': form})
     return render(request, 'gym/page2.html', {'form':form})
@@ -97,30 +98,29 @@ def page3(request):
 #Aggregation Query
 def page4(request):
     form = MyFormPage4(request.POST)
-    results3 = ""
     if request.method == "POST":
         if form.is_valid():
             AggregationQuery = request.POST["AggregationQuery"]
             if AggregationQuery == "Option 41":
-                results3 = my_sql_query_8(request)  # OPTION 1
+                results = my_sql_query_8(request)  # OPTION 1
             if AggregationQuery == "Option 42":
-                results3 = my_sql_query_9(request)  # OPTION 2
-            data = {'results3': results3}
+                results = my_sql_query_9(request)  # OPTION 2
+            data = {'results': results}
             return render(request, 'gym/page4.html', data)
     return render(request, 'gym/page4.html', {'form':form})
 
 #Nested Aggregation by Group-By
 def page5(request):
     form = MyFormPage5(request.POST)
-    results4 = ""
+    results = ""
     if request.method == "POST":
         if form.is_valid():
             NestedAggregationQuery = request.POST["NestedAggregationQuery"]
             if NestedAggregationQuery == "Option 31":
-                results4 = my_sql_query_10(request)  # OPTION 1
+                results = my_sql_query_10(request)  # OPTION 1
             if NestedAggregationQuery == "Option 32":
-                results4 = my_sql_query_11(request)  # OPTION 2
-            data = {'results4': results4}
+                results = my_sql_query_11(request)  # OPTION 2
+            data = {'results': results}
             return render(request, 'gym/page5.html', data)
     return render(request, 'gym/page5.html', {'form':form})
 
@@ -132,63 +132,38 @@ def viewC(request):
 # this is where we link the html to our app. where we put REST
 
 
-# #Delete WITHOUT CASCADE Operation
-# @login_required
-# def page6(request):
-#     form = MyFormPage6(request.POST)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             DeleteQuery = request.POST["DeleteQuery"]
-#             if DeleteQuery == "Option 6":
-#                 CustomerToDelete = request.POST.get('CustomerToDelete', False)
-#                 results = my_sql_query_13(request,CustomerToDelete)
-#                 print(results)
-#             data = {'results': results}
-#             return render(request, 'gym/page6.html', data)
-#     return render(request, 'gym/page6.html', {'form':form})
-
+#Delete WITHOUT CASCADE Operation
+@login_required
 def page6(request):
     form = MyFormPage6(request.POST)
-    keys = []
-    values = []
-    string = ""
     if request.method == "POST":
         if form.is_valid():
             DeleteQuery = request.POST["DeleteQuery"]
             if DeleteQuery == "Option 6":
                 CustomerToDelete = request.POST.get('CustomerToDelete', False)
-                results = my_sql_query_12(request,CustomerToDelete)
+                results = my_sql_query_13(request,CustomerToDelete)
                 print(results)
-
-                for key in results:
-                    keys.append(key)
-                    values.append(results[key])
-                string += "<htm><body><table>"
-
-                # Print the content of the table, line by line ----
-                for i in range(0, len(keys)):
-                    string += "<tr><td>" + keys[i] + "</td><td>" + values[i] + "</td></tr>"
-
-                # Print closing HTML tags -------------------------
-                string += "</table></body></html>"
-            data = {'results': string}
+            data = {'results': results}
             return render(request, 'gym/page6.html', data)
     return render(request, 'gym/page6.html', {'form':form})
 
 #Delete ON CASCADE Operation
 @login_required
 def page8(request):
-    form = MyFormPage6(request.POST)
+    form = MyFormPage8(request.POST)
     if request.method == "POST":
         if form.is_valid():
             DeleteQuery = request.POST["DeleteOnCascadeQuery"]
             if DeleteQuery == "Option 12":
                 CustomerToDelete2 = request.POST.get('CustomerToDelete2', False)
-                results = my_sql_query_13(request,CustomerToDelete2)
-                print(results)
+                try:
+                    results = my_sql_query_13(request, CustomerToDelete2)
+                    print(results)
+                except IntegrityError as e:
+                    return render_to_response('gym/page9.html', {"message":e.__cause__})
             data = {'results': results}
-            return render(request, 'gym/page6.html', data)
-    return render(request, 'gym/page6.html', {'form':form})
+            return render(request, 'gym/page8.html', data)
+    return render(request, 'gym/page8.html', {'form':form})
 
 #Update Operation
 @login_required
@@ -199,8 +174,11 @@ def page7(request):
             UpdateQuery = request.POST["UpdateQuery"]
             if UpdateQuery == "Option 7":
                 ToUpdate = request.POST.get('ToUpdate', False)
-                results = my_sql_query_14(request,ToUpdate)
-                print(results)
+                message = "An error has occured"
+                try:
+                    results = my_sql_query_14(request,ToUpdate)
+                except IntegrityError as e:
+                    return render_to_response('gym/page9.html', {"message":e.__cause__})
             data = {'results': results}
             return render(request, 'gym/page7.html', data)
     return render(request, 'gym/page7.html', {'form':form})

@@ -39,19 +39,19 @@ OPTIONS2 = (
 
 class MyFormPage1(forms.Form):
     EquipType = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage1Part1,label="Select one of the following equipment types:")
-    EquipType2 = forms.BooleanField(required=False, label="Return Equipment Type");
-    EquipRate = forms.BooleanField(required=False, label="Return Equipment Rate");
-    EquipDamageFee = forms.BooleanField(required=False, label="Return Equipment Damage Fee");
+    EquipType2 = forms.BooleanField(required=False, label="Click here to display: Equipment Type");
+    EquipRate = forms.BooleanField(required=False, label="Click here to display: Equipment Rate");
+    EquipDamageFee = forms.BooleanField(required=False, label="Click here to display: Equipment Damage Fee");
 
 OptionsPage2 = (
     ("Option 11","Get custID’s and cusName's of customers who booked equipment"),
 )
 
 class MyFormPage2(forms.Form):
-    JoinQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage2, required=True)
+    JoinQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage2, required=True, label="")
 
 OptionsPage3 = (
-    ("Option 10", "Get all customers who reserved every equipment"),
+    ("Option 10", "Get the customer who booked all equipments"),
 )
 
 class MyFormPage3(forms.Form):
@@ -103,10 +103,11 @@ class MyFormPage7(forms.Form):
     UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2)
 
 OptionsPage8 = (
-    ('13948', "CustomerID = 13948"),
-    ('03948', "CustomerID = 03948"),
-    ('03993', "CustomerID = 03993"),
+    ('654321', "Member with CustomerID = 654321"),
+    ('392837', "Member with CustomerID = 392837"),
+    ('472839', "Athlete with CustomerID = 472839"),
 )
+
 
 OptionsPage8Part2 = (
     ("Option 12", "I want to delete the customer"),

@@ -3,27 +3,104 @@
 
 {% block head %}
     <title>Employee Page 2</title>
+    <script src="sorttable.js"></script>
 {% endblock %}
 
 
 {% block body %}
-    <h1> Join Query: Get custID’s and cusNames of customers who booked rooms</h1>
+    <h1> Get the custID’s and cusNames of customers who booked rooms</h1>
     <br>
-    <h2 style="font-family: Arial;">Select the query you would like to see</h2>
+    <h2 style="font-family: Arial;">Select the query to perform:</h2>
         <form method="post" action=""> {% csrf_token %}
             {{ form.as_p }}
 
-            <button type="submit" value="Submit" onclick="return confirm('Are you sure?')">Submit</button>
+            <button type="submit" value="Submit">Submit</button>
         </form>
 
     <form action="" method="post"> {% csrf_token %}
-
-        <ul>
-            <p>
-            {% for result in results2 %}
-                    <li> {{ result }}</li>
-            {% endfor %}
-            </p>
-        </ul>
+        <div class="container">
+             <div>
+                <table class="table table-bordered table-hover sortable" id='my'>
+                    <thead>
+                        <tr>
+                            {% for key in results.0 %}
+                                <th onclick="sortTable(0)"> {{ key }} </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                        <tr>
+                            {% for key, value in result.items %}
+                                <td> {{ value }} </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
+        </div>
     </form>
+
+    <script type="text/javascript">
+        $('my').dataTable();
+    </script>
+
+
+        <script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable2");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
 {% endblock %}

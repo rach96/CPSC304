@@ -1,0 +1,16 @@
+{% extends 'gym/base.html' %}
+
+
+{% block head %}
+    <title>ERROR OCCURRED</title>
+{% endblock %}
+
+{% block body %}
+</body>
+    <h1>Your Query Was Not Performed!</h1>
+
+
+    <form method="post" action=""> {% csrf_token %}
+        <p> ERROR: </p> {{ message }}
+    </form>
+{% endblock %}

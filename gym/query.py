@@ -6,11 +6,15 @@ django.setup()
 from django.db import connection
 import argparse
 from django.db import connection, transaction
+from django.db import IntegrityError
 
 import sqlite3
 dbName = 'database.sqlite'
 conn = sqlite3.connect(dbName)
+
 curs = conn.cursor()
+
+curs.execute("PRAGMA foreign_keys = 1")
 
 def dictfetchall(cursor):
     "Returns all rows from a cursor as a dict"
@@ -120,7 +124,9 @@ def my_sql_query_7(self):
         # 3. DIVISION = Get all customers who reserved every equipment (change the sql file so that this is the case!)
         # Provide an interface for the user to choose this query
         #cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID))")
-        cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE NOT EXISTS (SELECT * FROM customer1 c2 WHERE e1.EquipCustID = c1.cusID and e1.EquipCustID = c2.cusID))")
+        #cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE NOT EXISTS (SELECT * FROM customer1 c2 WHERE e1.EquipCustID = c1.cusID and e1.EquipCustID = c2.cusID))")
+        #cursor.execute("SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1  WHERE NOT EXISTS (SELECT * FROM  customer1 c1 WHERE e1.EquipCustID != c1.cusID)")
+        cursor.execute("SELECT c1.cusID FROM customer1 c1 WHERE NOT EXISTS (SELECT * FROM  Equipment ep1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE e1.EquipCustID = c1.cusID and e1.EquipID = ep1.EquipID))")
         results = dictfetchall(cursor)
         print(results)
         return results
@@ -185,11 +191,14 @@ def my_sql_query_13(self,string9):
         # If we delete an customer (which is also an athlete), there will be an error
         # cusID is either a cusID taken from member of athlete
         #cursor.execute("DELETE FROM customer1 WHERE cusID = '01234'")
+        cursor.execute("PRAGMA foreign_keys = ON")
 
         string = "DELETE FROM customer1 WHERE cusID"
         string05 = " = "
         string1 = string9 #"01234"  # user-selected
         string += string05
+        print(string)
+        print(string1)
         string += string1
 
         resultString = "SELECT * FROM customer1"
@@ -201,6 +210,8 @@ def my_sql_query_13(self,string9):
         results = dictfetchall(cursor)
         print(results)
         return results
+
+
 
 def my_sql_query_14(self,string9):
     with connection.cursor() as cursor:
@@ -220,8 +231,11 @@ def my_sql_query_14(self,string9):
         #string += string1
         #string += string2
         print(string)
+
+
         cursor.execute(string)
         cursor.execute("SELECT * FROM room2")
+
 
         results = dictfetchall(cursor)
         print(results)

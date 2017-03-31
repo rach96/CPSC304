@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^page4/$', views.page4, name='Page4'),
     url(r'^page5/$', views.page5, name='Page5'),
     url(r'^page6/$', views.page6, name='Page6'),
+    url(r'^page8/$', views.page8, name='Page8'),
     url(r'^page7/$', views.page7, name='Page7'),
     url(r'^admin/', admin.site.urls),
 ]

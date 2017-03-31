@@ -1,5 +1,5 @@
 {% extends 'gym/base.html' %}
-
+{% include 'gym/base.html' %}
 
 {% block head %}
     <title>Employee Page 7</title>
@@ -11,16 +11,35 @@
     <h2 style="font-family: Arial;">Query: select the updated roomRate for Basketball Room</h2>
     <form method="post" action=""> {% csrf_token %}
         {{ form.as_p }}
+
+         {{ message}}
+
         <br>
         <button type="submit" value="Submit">Submit</button>
     </form>
     <form method="post" action=""> {% csrf_token %}
-        <ul>
-            <p>
-            {% for result in results %}
-                    <li> {{ result }}</li>
-            {% endfor %}
-            </p>
-        </ul>
+                <div class="container">
+             <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            {% for key in results.0 %}
+                                <th> {{ key }} </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                        <tr>
+                            {% for key, value in result.items %}
+                                <td> {{ value }} </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
+        </div>
+
     </form>
 {% endblock %}

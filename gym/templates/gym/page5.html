@@ -8,7 +8,7 @@
 {% block body %}
     <h1>Nested Aggregation with Group-by: Average equipment rate for each equipment type</h1>
     <br>
-    <h2 style="font-family: Arial;">Select the query you would like to see</h2>
+    <h2 style="font-family: Arial;">Select the query to perform:</h2>
     <form method="post" action=""> {% csrf_token %}
 
         {{ form.as_p }}
@@ -18,13 +18,27 @@
     </form>
 
     <form action="" method="post"> {% csrf_token %}
-
-        <ul>
-            <p>
-            {% for result in results4 %}
-                    <li> {{ result }}</li>
-            {% endfor %}
-            </p>
-        </ul>
+        <div class="container">
+             <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            {% for key in results.0 %}
+                                <th> {{ key }} </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in results %}
+                        <tr>
+                            {% for key, value in result.items %}
+                                <td> {{ value }} </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
+        </div>
     </form>
 {% endblock %}

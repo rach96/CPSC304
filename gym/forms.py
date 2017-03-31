@@ -26,7 +26,7 @@ class UserLoginForm(forms.Form):
 OptionsPage1Part1 = (
     ('TennisRacket', "Tennis Racket"),
     ('TennisBall', "Tennis Ball"),
-    ('BasketBall', "Basket Ball"),
+    ('Basketball', "Basket Ball"),
     ('Badminton', "Badminton"),
     ('Ping Pong', "Ping Pong")
 )
@@ -39,23 +39,23 @@ OPTIONS2 = (
 
 class MyFormPage1(forms.Form):
     EquipType = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage1Part1,label="Select one of the following equipment types:")
-    EquipType2 = forms.BooleanField(required=False, label="Click here to display: Equipment Type");
-    EquipRate = forms.BooleanField(required=False, label="Click here to display: Equipment Rate");
-    EquipDamageFee = forms.BooleanField(required=False, label="Click here to display: Equipment Damage Fee");
+    EquipType2 = forms.BooleanField(required=False, label="Click here to display: Equipment Type")
+    EquipRate = forms.BooleanField(required=False, label="Click here to display: Equipment Rate")
+    EquipDamageFee = forms.BooleanField(required=False, label="Click here to display: Equipment Damage Fee")
 
 OptionsPage2 = (
-    ("Option 11","Get custID’s and cusName's of customers who booked equipment"),
+    ("Option 11","Get custID’s and cusName's of customers who booked rooms"),
 )
 
 class MyFormPage2(forms.Form):
     JoinQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage2, required=True, label="")
 
 OptionsPage3 = (
-    ("Option 10", "Get the customer who booked all equipments"),
+    ("Option 10", "Get the customer ID's of customers who booked all the equipment"),
 )
 
 class MyFormPage3(forms.Form):
-    DivisionQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage3, required=True)
+    DivisionQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage3, required=True, label="")
 
 OptionsPage4 = (
     ("Option 41", "Number of rooms booked during the week for all customers"),
@@ -63,7 +63,7 @@ OptionsPage4 = (
 )
 
 class MyFormPage4(forms.Form):
-    AggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage4, required=True)
+    AggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage4, required=True, label="")
 
 OptionsPage5 = (
     ("Option 31", "MAX(Average equipment rate for each equipment type)"),
@@ -71,12 +71,10 @@ OptionsPage5 = (
 )
 
 class MyFormPage5(forms.Form):
-    NestedAggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage5, required=True)
+    NestedAggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage5, required=True, label="")
 
 OptionsPage6Part1 = (
-    ('13948', "EmployeeID = 13948"),
-    ('03948', "EmployeeID = 03948"),
-    ('03993', "EmployeeID = 03993"),
+    ('8147564912', "EmployeeID = 8147564912"),
 )
 
 OptionsPage6Part2 = (
@@ -84,8 +82,8 @@ OptionsPage6Part2 = (
 )
 
 class MyFormPage6(forms.Form):
-    CustomerToDelete = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part1)
-    DeleteQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part2)
+    CustomerToDelete = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part1, label="")
+    DeleteQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part2, label="")
 
 OptionsPage7Part1 = (
     (200.00, "$200"),
@@ -99,12 +97,12 @@ OptionsPage7Part2 = (
 )
 
 class MyFormPage7(forms.Form):
-    ToUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1)
-    UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2)
+    ToUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1, label="")
+    UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2, label="")
 
 OptionsPage8 = (
     ('654321', "Member with CustomerID = 654321"),
-    ('392837', "Member with CustomerID = 392837"),
+    ('392764', "Member with CustomerID = 392837"),
     ('472839', "Athlete with CustomerID = 472839"),
 )
 
@@ -114,6 +112,6 @@ OptionsPage8Part2 = (
 )
 
 class MyFormPage8(forms.Form):
-    CustomerToDelete2 = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8)
-    DeleteOnCascadeQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8Part2)
+    CustomerToDelete2 = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8, label="")
+    DeleteOnCascadeQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8Part2, label="")
 

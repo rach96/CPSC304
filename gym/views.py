@@ -141,7 +141,7 @@ def page6(request):
             DeleteQuery = request.POST["DeleteQuery"]
             if DeleteQuery == "Option 6":
                 CustomerToDelete = request.POST.get('CustomerToDelete', False)
-                results = my_sql_query_13(request,CustomerToDelete)
+                results = my_sql_query_12(request,CustomerToDelete)
                 print(results)
             data = {'results': results}
             return render(request, 'gym/page6.html', data)

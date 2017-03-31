@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Total # of rooms booked during the week for all customers</h1>
+    <h1>Total # of rooms or equipment booked during the week for all customers</h1>
     <br>
     <h2 style="font-family: Arial;">Select the query to perform:</h2>
         <form method="post" action=""> {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" value="Submit">Submit</button>
+            <button type="submit" value="Submit" class="btn btn-default">Submit</button>
 
         </form>
 

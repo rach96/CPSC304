@@ -171,15 +171,14 @@ def my_sql_query_11(self):
         print(results)
         return results
 
-def my_sql_query_12(self,string9,string99):
+def my_sql_query_12(self,string9):
     with connection.cursor() as cursor:
         # 6. DELETE WITHOUT CASCADE = Delete a tuple in clean with a given RoomID, time, and employee ID
         # Some input values would fail the cascade specification but others would successfully follow the cascade specification
         # NOTE = replace employeeID, employeeroomID, and employeeTIME with user input
         cursor.execute(
-           "DELETE FROM clean WHERE employeeID = '1234' and employeeroomID = '0234' and employeeTime = 'Monday'")
+           "DELETE FROM clean WHERE employeeID = '8147564912' and employeeroomID = '8452' and employeeTime = '8'")
         cursor.execute("SELECT * FROM clean")
-
         results = dictfetchall(cursor)
         print(results)
         return results

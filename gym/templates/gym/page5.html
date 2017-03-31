@@ -11,7 +11,10 @@
     <h2 style="font-family: Arial;">Select the query to perform:</h2>
     <form method="post" action=""> {% csrf_token %}
 
+        {%  if form.errors %}
+        {% endif %}
         {{ form.as_p }}
+
 
         <br>
         <button type="submit" value="Submit" class="btn btn-default">Submit</button>

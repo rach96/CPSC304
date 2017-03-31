@@ -1,4 +1,6 @@
 {% extends 'gym/base.html' %}
+{% load crispy_forms_tags %}
+{% crispy example_form example_form.helper %}
 
 
 {% block head %}
@@ -11,7 +13,14 @@
 
             <form action="" method="post"> {% csrf_token %}
 
-                {{ form.as_p}}
+                {{ form|crispy}}
+               {% if form.errors %}
+                    {% for error in field.errors %}
+                        <p class="error-message">
+                            <strong>{{ error|escape }}</strong>
+                        </p>
+                    {% endfor %}
+                {% endif %}
 
                 <button type="submit" class="btn btn-default">Submit</button>
 

@@ -6,6 +6,7 @@ from django.contrib.auth import (
     login,
     logout,
     )
+from crispy_forms.helper import FormHelper
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()
@@ -38,7 +39,8 @@ OPTIONS2 = (
 )
 
 class MyFormPage1(forms.Form):
-    EquipType = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage1Part1,label="Select one of the following equipment types:")
+    error_css_class = "error"
+    EquipType = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage1Part1,label="Select one of the following equipment types:",error_messages={'required': ''})
     EquipType2 = forms.BooleanField(required=False, label="Click here to display: Equipment Type")
     EquipRate = forms.BooleanField(required=False, label="Click here to display: Equipment Rate")
     EquipDamageFee = forms.BooleanField(required=False, label="Click here to display: Equipment Damage Fee")
@@ -92,17 +94,19 @@ OptionsPage7Part1 = (
     (39.00, "$39"),
 )
 
+
 OptionsPage7Part2 = (
     ("Option 7", "I want to update"),
 )
 
 class MyFormPage7(forms.Form):
-    ToUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1, label="")
+    # ToUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1, label="")
+    ToUpdateChar = forms.CharField(label="Insert The Value")
     UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2, label="")
 
 OptionsPage8 = (
     ('654321', "Member with CustomerID = 654321"),
-    ('392764', "Member with CustomerID = 392837"),
+    ('392764', "Member with CustomerID = 392764"),
     ('472839', "Athlete with CustomerID = 472839"),
 )
 

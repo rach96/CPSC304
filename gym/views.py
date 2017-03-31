@@ -47,13 +47,13 @@ def page1(request):
                     print(Select)
                 if not request.POST.get("EquipRate", None) == None:
                     if Select == "":
-                        Select += "EquipRate"
+                        Select += " EquipRate"
                     else:
                         Select += " , EquipRate"
                     print(Select)
                 if not request.POST.get("EquipDamageFee", None) == None:
                     if Select == "":
-                        Select += "EquipDamageFee"
+                        Select += " EquipDamageFee"
                     else:
                         Select += " , EquipDamageFee"
                     print(Select)
@@ -173,10 +173,10 @@ def page7(request):
         if form.is_valid():
             UpdateQuery = request.POST["UpdateQuery"]
             if UpdateQuery == "Option 7":
-                ToUpdate = request.POST.get('ToUpdate', False)
+                ToUpdateChar = request.POST.get('ToUpdateChar', False)
                 message = "An error has occured"
                 try:
-                    results = my_sql_query_14(request,ToUpdate)
+                    results = my_sql_query_14(request,ToUpdateChar)
                 except IntegrityError as e:
                     return render_to_response('gym/page9.html', {"message":e.__cause__})
             data = {'results': results}

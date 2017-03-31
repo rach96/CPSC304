@@ -7,7 +7,6 @@ drop table if exists Equipment_checkIn_reserveOrcancel_return2;
 drop table if exists room1;
 drop table if exists room2;
 drop table if exists recordsTransactionHistory;
-drop table if exists returnOrCancelRoom;
 drop table if exists checkInRoom;
 drop table if exists clean;
 drop table if exists createOrUpdateAccount;
@@ -109,7 +108,7 @@ create table if not exists athlete
     (athleteTeam char(20) not null,
      athleteID int not null,
      primary key (athleteID),
-     foreign key (athleteID) references customer1);
+     foreign key (athleteID) references customer1(cusID));
 
  insert into athlete
      values('Rangers',129382);
@@ -127,7 +126,8 @@ create table if not exists member
      memberRenewalTime text not null,
      memberType char(20) not null,
      primary key (memberID),
-     foreign key (memberID) references customer1 ON DELETE CASCADE);
+     foreign key (memberID) references customer1(cusID)
+     ON DELETE CASCADE);
 
  insert into member
      values(654321,'2017/04/24', 'monthly');
@@ -296,7 +296,15 @@ INSERT INTO employee
 create table if not exists clean
     (employeeRoomID int not null,
      employeeTime int null,
-     employeeID int not null,
-     primary key (employeeRoomID));
+     employeeSSN int not null,
+     primary key (employeeRoomID),
+     foreign key (employeeSSN) references employee);
 
-Update room2 Set roomRate = 30000 Where roomType = 'Basketball'
+INSERT INTO clean
+    Values(8452,1200,8147564912);
+INSERT INTO clean
+    Values(8453,1400,8147135912);
+INSERT INTO clean
+    Values(8454,930,8147564346);
+INSERT INTO clean
+    Values(8455,1630,8147534667);

@@ -75,7 +75,7 @@ class MyFormPage5(forms.Form):
     NestedAggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage5, required=True, label="")
 
 OptionsPage6Part1 = (
-    ('8147564912', "EmployeeID = 8147564912"),
+    ('8147564912', "EmployeeID = 8147564912, EmployeeName = Amy Tang"),
 )
 
 OptionsPage6Part2 = (

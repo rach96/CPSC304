@@ -97,26 +97,26 @@ def my_sql_query_5(self):
     with connection.cursor() as cursor:
         # 2. JOIN = Get custID's of customers who booked rooms
         # Provide an interface for the user to choose this query
-        cursor.execute("SELECT cusID FROM reservedRoom INNER JOIN customer1 ON reservedRoom.customerID = customer1.cusID INNER JOIN room1 ON reservedRoom.customerID = room1.roomID")
+        cursor.execute("SELECT customerID, customer1.cusName FROM reservedRoom INNER JOIN customer1 ON reservedRoom.customerID = customer1.cusID INNER JOIN room1 ON reservedRoom.roomID = room1.roomID")
         results = dictfetchall(cursor)
         print(results)
         return results
 
 
-def my_sql_query_6(self):
-    with connection.cursor() as curs:
-        # curs.execute("SELECT * FROM sqlite_master WHERE type='table'")
-        # curs.execute("CREATE TABLE TEST(cusName char(20) not null, cusPhoneNumber int null, cusBirthday text null)")
-        # curs.execute("SELECT * FROM TEST")
-        # results = dictfetchall(curs)
-        # print(results)
-        # return results
-        # 2. JOIN = Get custID's of customers who booked rooms
-        # # Provide an interface for the user to choose this query
-        curs.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2 INNER JOIN customer1 ON Equipment_checkIn_reserveOrcancel_return2.EquipCustID = customer1.cusID")
-        results = dictfetchall(curs)
-        print(results)
-        return results
+# def my_sql_query_6(self):
+#     with connection.cursor() as curs:
+#         # curs.execute("SELECT * FROM sqlite_master WHERE type='table'")
+#         # curs.execute("CREATE TABLE TEST(cusName char(20) not null, cusPhoneNumber int null, cusBirthday text null)")
+#         # curs.execute("SELECT * FROM TEST")
+#         # results = dictfetchall(curs)
+#         # print(results)
+#         # return results
+#         # 2. JOIN = Get custID's of customers who booked rooms
+#         # # Provide an interface for the user to choose this query
+#         curs.execute("SELECT cusID, cusName FROM Equipment_checkIn_reserveOrcancel_return2 INNER JOIN customer1 ON Equipment_checkIn_reserveOrcancel_return2.EquipCustID = customer1.cusID")
+#         results = dictfetchall(curs)
+#         print(results)
+#         return results
 
 
 def my_sql_query_7(self):
@@ -126,7 +126,7 @@ def my_sql_query_7(self):
         #cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS ((SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1) EXCEPT (SELECT e3.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e3, customer1  c1 WHERE E3.EquipCustID = c1.cusID))")
         #cursor.execute("SELECT c1.cusID FROM customer1  c1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE NOT EXISTS (SELECT * FROM customer1 c2 WHERE e1.EquipCustID = c1.cusID and e1.EquipCustID = c2.cusID))")
         #cursor.execute("SELECT e1.EquipID FROM Equipment_checkIn_reserveOrcancel_return2  e1  WHERE NOT EXISTS (SELECT * FROM  customer1 c1 WHERE e1.EquipCustID != c1.cusID)")
-        cursor.execute("SELECT c1.cusID FROM customer1 c1 WHERE NOT EXISTS (SELECT * FROM  Equipment ep1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE e1.EquipCustID = c1.cusID and e1.EquipID = ep1.EquipID))")
+        cursor.execute("SELECT c1.cusID, c1.cusName FROM customer1 c1 WHERE NOT EXISTS (SELECT * FROM  Equipment ep1 WHERE NOT EXISTS (SELECT * FROM Equipment_checkIn_reserveOrcancel_return2  e1 WHERE e1.EquipCustID = c1.cusID and e1.EquipID = ep1.EquipID))")
         results = dictfetchall(cursor)
         print(results)
         return results
@@ -173,13 +173,13 @@ def my_sql_query_11(self):
 
 def my_sql_query_12(self,string9):
     with connection.cursor() as cursor:
-        # 6. DELETE WITHOUT CASCADE = Delete a tuple in clean with a given RoomID, time, and employee ID
+        # 6. DELETE = Delete a tuple in clean with a given RoomID, time, and employee ID
         # Some input values would fail the cascade specification but others would successfully follow the cascade specification
         # NOTE = replace employeeID, employeeroomID, and employeeTIME with user input
 
         cursor.execute(
-           "DELETE FROM clean WHERE employeeID = '8147564912' and employeeroomID = '8452' and employeeTime = '8'")
-        cursor.execute("SELECT * FROM clean")
+           "DELETE FROM clean WHERE employeeID = '8147564912' and RoomID = '8452' and CleanTime= '8'")
+        cursor.execute("SELECT employee.employeeName, employee.employeeID, room1.roomType, clean.RoomID FROM clean, employee, room1 WHERE clean.RoomID = room1.roomID AND clean.employeeID = employee.employeeID")
         results = dictfetchall(cursor)
         print(results)
         return results

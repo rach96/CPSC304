@@ -9,7 +9,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.homepage, name='homepage'),
     url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^viewC/$', views.viewC, name='viewC'),
     url(r'^page1/$', views.page1, name='Page1'),
     url(r'^page2/$', views.page2, name='Page2'),

@@ -2,30 +2,22 @@
 
 
 {% block head %}
-    <title>Employee Page 2</title>
-    <script src="sorttable.js"></script>
+    <title>Resulting Table</title>
 {% endblock %}
 
-
 {% block body %}
-    <h1> Get the custID’s and cusNames of customers who booked rooms</h1>
-    <br>
-    <h2 style="font-family: Arial;">Select the query to perform:</h2>
-        <form method="post" action=""> {% csrf_token %}
-            {{ form.as_p }}
 
+    <h1>Resulting Table from Query:</h1>
+    <h2>{{ field.id_for_label }}</h2>
 
-            <button type="submit" value="Submit" class="btn btn-default">Submit</button>
-        </form>
-
-    <form action="" method="post"> {% csrf_token %}
+<form action="" method="post"> {% csrf_token %}
         <div class="container">
              <div>
                 <table class="table table-bordered table-hover sortable" id='my'>
                     <thead>
                         <tr>
                             {% for key in results.0 %}
-                                <th onclick="sortTable(0)"> {{ key }} </th>
+                                <th> {{ key }} </th>
                             {% endfor %}
                         </tr>
                     </thead>
@@ -42,6 +34,5 @@
              </div>
         </div>
     </form>
-
 
 {% endblock %}

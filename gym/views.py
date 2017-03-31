@@ -62,7 +62,7 @@ def page1(request):
             print (Select)
             results = my_sql_query_1(request,Select,EquipType)
             data = {'results': results}
-            return render(request, 'gym/page1.html', data)
+            return render(request, 'gym/page10.html', data)
     else:
         print(Select)
         return render(request, 'gym/page1.html', {'form':form})

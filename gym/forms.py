@@ -6,7 +6,6 @@ from django.contrib.auth import (
     login,
     logout,
     )
-from crispy_forms.helper import FormHelper
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()
@@ -68,8 +67,8 @@ class MyFormPage4(forms.Form):
     AggregationQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage4, required=True, label="")
 
 OptionsPage5 = (
-    ("Option 31", "MAX(Average equipment rate for each equipment type)"),
-    ("Option 32", "MIN(Average equipment rate for each equipment type)"),
+    ("Option 31", "The most rented out equipment type [MAX(count(equipment type rented)]"),
+    ("Option 32", "The least rented out equipment type [MIN(count(equipment type rented)]"),
 )
 
 class MyFormPage5(forms.Form):
@@ -106,7 +105,7 @@ class MyFormPage7(forms.Form):
 
 OptionsPage8 = (
     ('654321', "Member with CustomerID = 654321"),
-    ('392764', "Member with CustomerID = 392764"),
+    ('392837', "Member with CustomerID = 392837"),
     ('472839', "Athlete with CustomerID = 472839"),
 )
 

@@ -4,7 +4,6 @@
     <data-source name="database.sqlite" uuid="d22a0fe5-9fb8-414b-80ce-e7bc9fe44637">
       <database-info product="SQLite" version="3.16.1" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
-      <secret-storage>master_key</secret-storage>
       <auth-required>false</auth-required>
     </data-source>
   </component>

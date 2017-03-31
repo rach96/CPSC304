@@ -53,7 +53,7 @@ def my_sql_query_1(self,string9,string999):
         # NOTE = replace BASKETBALL with whatever the user inputs
         # string = SELECT * FROM Equipment_checkIn_reserveOrcancel_return1 WHERE EquipType ='Basketball'"
 
-        string = "SELECT"
+        string = "SELECT "
         string05 = string9 #"*"                                                             #user-selected
         string1 = " FROM Equipment_checkIn_reserveOrcancel_return1"                         #user-selected????
         string2 = " WHERE EquipType = '"
@@ -154,7 +154,7 @@ def my_sql_query_10(self):
         # 5. NESTED AGGREGATION = average for each group and then finds either the minimum or maximum across all those averages
         # MAX(Average equipment rate for each equipment type)
         cursor.execute(
-            "SELECT MAX(AverageByType) FROM (SELECT AVG(equipRate) AS AverageByType FROM Equipment_checkIn_reserveOrcancel_return1  e1 GROUP BY e1.equipType)")
+            "SELECT MAX(CountByType), EquipType FROM (SELECT COUNT(EquipType) AS CountByType, EquipType FROM Equipment_checkIn_reserveOrcancel_return2  e2 GROUP BY e2.EquipType)")
 
         results = dictfetchall(cursor)
         print(results)
@@ -165,7 +165,7 @@ def my_sql_query_11(self):
         # 5. NESTED AGGREGATION = Type of Equipment with the LEAST cost
         # MIN(Average equipment rate for each equipment type)
         cursor.execute(
-            "SELECT MIN(AverageByType) FROM (SELECT AVG(equipRate) AS AverageByType FROM Equipment_checkIn_reserveOrcancel_return1  e1 GROUP BY e1.equipType)")
+            "SELECT MIN(CountByType), EquipType FROM (SELECT COUNT(EquipType) AS CountByType, EquipType FROM Equipment_checkIn_reserveOrcancel_return2  e2 GROUP BY e2.EquipType)")
 
         results = dictfetchall(cursor)
         print(results)
@@ -176,6 +176,7 @@ def my_sql_query_12(self,string9):
         # 6. DELETE WITHOUT CASCADE = Delete a tuple in clean with a given RoomID, time, and employee ID
         # Some input values would fail the cascade specification but others would successfully follow the cascade specification
         # NOTE = replace employeeID, employeeroomID, and employeeTIME with user input
+
         cursor.execute(
            "DELETE FROM clean WHERE employeeID = '8147564912' and employeeroomID = '8452' and employeeTime = '8'")
         cursor.execute("SELECT * FROM clean")

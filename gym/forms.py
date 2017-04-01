@@ -45,7 +45,7 @@ class MyFormPage1(forms.Form):
     EquipDamageFee = forms.BooleanField(required=False, label="Click here to display: Equipment Damage Fee")
 
 OptionsPage2 = (
-    ("Option 11","Get custID’s and cusName's of customers who booked rooms"),
+    ("Option 11", "Get custID's and cusName's of customers who booked rooms"),
 )
 
 class MyFormPage2(forms.Form):
@@ -53,6 +53,7 @@ class MyFormPage2(forms.Form):
 
 OptionsPage3 = (
     ("Option 10", "Get the customer ID's of customers who booked all the equipment"),
+    ("Option 12", "Insert a Equipment and Resubmit")
 )
 
 class MyFormPage3(forms.Form):

@@ -28,7 +28,7 @@ from .forms import MyFormPage7
 from .forms import MyFormPage8
 
 from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7,my_sql_query_5,my_sql_query_8,\
-    my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
+    my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14,my_sql_query_7_insert
 
 def homepage(request):
     #my_custom_sql(request)
@@ -91,6 +91,8 @@ def page3(request):
             if DivisionQuery == "Option 10":
                 results = my_sql_query_7(request)
                 data = {'results': results}
+            if DivisionQuery == "Option 12":
+                results = my_sql_query_7_insert(request)
             return render(request, 'gym/page3.html', data)
     print({'form':form})
     return render(request, 'gym/page3.html', {'form': form})

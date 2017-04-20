@@ -8,40 +8,18 @@
 
 
 {% block body %}
-    <h1> Get the custID’s and cusNames of customers who booked rooms</h1>
+    <h1>Join: Get the ID’s and Names of customers who booked rooms</h1>
     <br>
     <h2 style="font-family: Arial;">Select the query to perform:</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+{#    <h2 style="font-family: Arial;">Select the query to perform:</h2>#}
         <form method="post" action=""> {% csrf_token %}
             {{ form.as_p }}
-
-
+            <br>
             <button type="submit" value="Submit" class="btn btn-default">Submit</button>
         </form>
-
-    <form action="" method="post"> {% csrf_token %}
-        <div class="container">
-             <div>
-                <table class="table table-bordered table-hover sortable" id='my'>
-                    <thead>
-                        <tr>
-                            {% for key in results.0 %}
-                                <th onclick="sortTable(0)"> {{ key }} </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for result in results %}
-                        <tr>
-                            {% for key, value in result.items %}
-                                <td> {{ value }} </td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-             </div>
-        </div>
-    </form>
-
 
 {% endblock %}

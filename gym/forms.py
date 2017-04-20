@@ -45,7 +45,7 @@ class MyFormPage1(forms.Form):
     EquipDamageFee = forms.BooleanField(required=False, label="Click here to display: Equipment Damage Fee")
 
 OptionsPage2 = (
-    ("Option 11","Get custID’s and cusName's of customers who booked rooms"),
+    ("Option 11", "Get custID's and cusName's of customers who booked rooms"),
 )
 
 class MyFormPage2(forms.Form):
@@ -53,6 +53,7 @@ class MyFormPage2(forms.Form):
 
 OptionsPage3 = (
     ("Option 10", "Get the customer ID's of customers who booked all the equipment"),
+    ("Option 12", "Insert a Equipment and Resubmit")
 )
 
 class MyFormPage3(forms.Form):
@@ -83,8 +84,9 @@ OptionsPage6Part2 = (
 )
 
 class MyFormPage6(forms.Form):
-    CustomerToDelete = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part1, label="")
-    DeleteQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part2, label="")
+    #CustomerToDelete = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part1, label="")
+    CustomerToDelete = forms.CharField(label="Insert the Employee ID")
+    DeleteQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage6Part2, label="Are you sure?")
 
 OptionsPage7Part1 = (
     (200.00, "$200"),
@@ -101,7 +103,7 @@ OptionsPage7Part2 = (
 class MyFormPage7(forms.Form):
     # ToUpdate = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part1, label="")
     ToUpdateChar = forms.CharField(label="Insert The Value")
-    UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2, label="")
+    UpdateQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage7Part2, label="Are you sure?")
 
 OptionsPage8 = (
     ('654321', "Member with CustomerID = 654321, CustomerName = Herb Derp"),
@@ -115,6 +117,6 @@ OptionsPage8Part2 = (
 )
 
 class MyFormPage8(forms.Form):
-    CustomerToDelete2 = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8, label="")
-    DeleteOnCascadeQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8Part2, label="")
-
+    #CustomerToDelete2 = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8, label="")
+    CustomerToDelete2 = forms.CharField(label="Insert Customer ID:")
+    DeleteOnCascadeQuery = forms.ChoiceField(widget=forms.RadioSelect, choices=OptionsPage8Part2, label="Are you sure?")

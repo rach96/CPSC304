@@ -1,19 +1,21 @@
-drop table if exists customer1;
-drop table if exists customer2;
+drop table if exists member;
 drop table if exists athlete;
+drop table if exists customer2;
+drop table if exists customer1;
+DROP TABLE if EXISTS Equipment;
 drop table if exists Equipment_checkIn_reserveOrcancel_return1;
 drop table if exists employee;
 drop table if exists Equipment_checkIn_reserveOrcancel_return2;
 drop table if exists room1;
 drop table if exists room2;
 drop table if exists recordsTransactionHistory;
+drop table if exists reservedRoom;
 drop table if exists checkInRoom;
 drop table if exists clean;
 drop table if exists createOrUpdateAccount;
-drop table if exists member;
+
 drop table if exists returnRooms;
 
-PRAGMA foreign_keys = ON;
 
 create table if not exists customer2
     (cusName char(20) not null,
@@ -108,7 +110,8 @@ create table if not exists athlete
     (athleteTeam char(20) not null,
      athleteID int not null,
      primary key (athleteID),
-     foreign key (athleteID) references customer1(cusID));
+     foreign key (athleteID) references customer1(cusID)
+     ON DELETE RESTRICT);
 
  insert into athlete
      values('Rangers',129382);
@@ -127,7 +130,7 @@ create table if not exists member
      memberType char(20) not null,
      primary key (memberID),
      foreign key (memberID) references customer1(cusID)
-     ON DELETE CASCADE);
+     ON DELETE CASCADE );
 
  insert into member
      values(654321,'2017/04/24', 'monthly');
@@ -143,9 +146,10 @@ insert into member
 
 create table if not exists Equipment_checkIn_reserveOrcancel_return1
     (EquipType char(20) not null,
-     EquipRate double not null CHECK(EquipRate > 0 & EquipRate < 100),
+     EquipRate double not null,
      EquipDamageFee double not null,
-     primary key (EquipType));
+     primary key (EquipType),
+     CHECK(EquipRate > 0 AND EquipRate < 100));
 
  insert into Equipment_checkIn_reserveOrcancel_return1
      values('TennisRacket', 10.00, 39.12);
@@ -158,21 +162,75 @@ create table if not exists Equipment_checkIn_reserveOrcancel_return1
  insert into Equipment_checkIn_reserveOrcancel_return1
      values('Ping Pong', 2.00, 5.25);
 
-create table if not exists Equipment_checkIn_reserveOrcancel_return2
+CREATE TABLE IF NOT EXISTS Equipment
     (EquipID int not null,
      EquipType char(20) not null,
+     PRIMARY KEY (EquipID));
+
+INSERT INTO Equipment
+    VALUES (2355, 'TennisRacket');
+INSERT INTO Equipment
+    VALUES (2341, 'Basketball');
+INSERT INTO Equipment
+    VALUES (2563, 'Badminton');
+
+create table if not exists Equipment_checkIn_reserveOrcancel_return2
+    (EquipID int not null,
+     EquipTIME int null,
+     EquipType char(20) not null,
      EquipCustID int not null,
-     primary key (EquipID),
+     primary key (EquipID, EquipCustID),
+     FOREIGN KEY (EquipID) REFERENCES Equipment(EquipID),
      foreign key (EquipCustID) references customer1(cusID));
 
  insert into Equipment_checkIn_reserveOrcancel_return2
-     values(2355, 'TennisRacket', 129382);
+     values(2355, 8, 'TennisRacket', 129382);
+insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2341, 9, 'Basketball', 129382);
  insert into Equipment_checkIn_reserveOrcancel_return2
-     values(5432, 'Badminton', 392837);
- insert into Equipment_checkIn_reserveOrcancel_return2
-     values(3463, 'Ping Pong', 472839);
- insert into Equipment_checkIn_reserveOrcancel_return2
-     values(2563, 'Badminton', 42345);
+     values(2341, 15, 'Basketball', 392764);
+insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2563, 20,'Badminton', 129382);
+
+insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2355, 10,'TennisRacket', 22345);
+insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2341, 9,'Basketball', 42345);
+insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2563, 13,'Badminton', 472839);
+insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2563, 16,'Badminton', 625678);
+insert into Equipment_checkIn_reserveOrcancel_return2
+     values(2563, 17,'Badminton', 654124);
+
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 12345);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 22345);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 32345);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 42345);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 52345);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 239483);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 472839);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 123456);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 123457);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 654321);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 392837);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 654124);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 392764);
+--  insert into Equipment_checkIn_reserveOrcancel_return2
+--      values(2563, 'Badminton', 625678);
 
 
 create table if not exists room1
@@ -193,10 +251,11 @@ INSERT INTO room1
 
 create table if not exists room2
     (roomType char(20),
-     roomRate double null CHECK(roomRate > 0 & roomRate < 100),
+     roomRate double null,
      roomSlots int null,
      roomDamageFee double null,
-     primary key (roomType));
+     primary key (roomType),
+    CHECK(roomRate > 0 AND roomRate < 100));
 
 INSERT INTO room2
     VALUES ('Large Gym Room', 5.00, 15, 10.00);
@@ -228,25 +287,24 @@ INSERT INTO returnRooms
     VALUES (8456, 129382);
 
 
-
 create table if not exists reservedRoom
     (roomID int not null,
      customerID int not null,
      time text NOT NULL,
      PRIMARY KEY (roomID,customerID),
-     foreign key (roomID) references room1,
-     foreign key (customerID) references customer1);
+     foreign key (roomID) references room1(roomID),
+     foreign key (customerID) references customer1(cusID));
 
--- INSERT INTO reservedRoom
---    VALUES (8452, 32345, 'Monday');
--- INSERT INTO reservedRoom
---    VALUES (8453, 42345, 'Monday');
--- INSERT INTO reservedRoom
---    VALUES (8454, 123456, 'Saturday');
--- INSERT INTO reservedRoom
---    VALUES (8455, 22345, 'Sunday');
--- INSERT INTO reservedRoom
---    VALUES (8456, 129382, 'Sunday');
+INSERT INTO reservedRoom
+   VALUES (8452, 32345, 'Monday');
+INSERT INTO reservedRoom
+   VALUES (8453, 42345, 'Monday');
+INSERT INTO reservedRoom
+   VALUES (8454, 123456, 'Saturday');
+INSERT INTO reservedRoom
+   VALUES (8455, 22345, 'Sunday');
+INSERT INTO reservedRoom
+   VALUES (8456, 129382, 'Sunday');
 
 
 --may nt need this table (no query)
@@ -276,35 +334,40 @@ create table if not exists recordsTransactionHistory
 
 create table if not exists employee
     (employeeSSN int not null,
+     employeeID int not null,
      employeeName char(20) null,
      employeeGender char(20) null,
      employeeBirthday text null,
-     primary key (employeeSSN));
+     primary key (employeeID));
 
 INSERT INTO employee
-    VALUES (8147564912, 'Amy Tang', 'female', '1966/06/04');
+    VALUES (123984, 8147564912, 'Amy Tang', 'female', '1966/06/04');
 INSERT INTO employee
-    VALUES (8147135912, 'Ralph Sui', 'male', '1984/06/12');
+    VALUES (1273462, 8147135912, 'Ralph Sui', 'male', '1984/06/12');
 INSERT INTO employee
-    VALUES (8147346712, 'Robert King', 'male', '1977/09/20');
+    VALUES (12743264, 8147346712, 'Robert King', 'male', '1977/09/20');
 INSERT INTO employee
-    VALUES (8147564346, 'Nichol Smith', 'female', '1990/05/15');
+    VALUES (12472374, 8147564346, 'Nichol Smith', 'female', '1990/05/15');
 INSERT INTO employee
-    VALUES (8147534667, 'Sean Mendez', 'male', '1979/07/09');
+    VALUES (1264264, 8147534667, 'Sean Mendez', 'male', '1979/07/09');
 
 
 create table if not exists clean
-    (employeeRoomID int not null,
-     employeeTime int null,
-     employeeSSN int not null,
-     primary key (employeeRoomID),
-     foreign key (employeeSSN) references employee);
+    (RoomID int not null,
+     CleanTime int null,
+     employeeID int not null,
+     primary key (RoomID, employeeID),
+     foreign key (RoomID) references room1(roomID),
+     foreign key (employeeID) REFERENCES employee(employeeID));
+
 
 INSERT INTO clean
-    Values(8452,1200,8147564912);
+    VALUES (8452, 8, 8147564912);
 INSERT INTO clean
-    Values(8453,1400,8147135912);
+    VALUES (8454, 10, 8147135912);
 INSERT INTO clean
-    Values(8454,930,8147564346);
+    VALUES (8453, 11, 8147346712);
 INSERT INTO clean
-    Values(8455,1630,8147534667);
+    VALUES (8455, 8, 8147564346);
+INSERT INTO clean
+    VALUES (8456, 6, 8147534667);

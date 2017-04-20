@@ -1,43 +1,86 @@
 {% extends 'gym/base.html' %}
 
-
 {% block head %}
     <title>Employee Page 8</title>
 {% endblock %}
 
 {% block body %}
-    <h1>Delete operation: Delete an customer with a given cusID </h1>
+    <h1>Delete operation: Delete an customer with a given ID </h1>
     <br>
-    <div id="Delete-on-cascade">
-    <h2 style="font-family: Arial;">Query 1: select the customer id you want to delete</h2>
-    <form method="post" action=""> {% csrf_token %}
-        {{ form.as_p }}
-        <br>
-        <button type="submit" value="Submit">Submit</button>
-    </form>
-    <form method="post" action=""> {% csrf_token %}
+    <h2 style="font-family: Arial;">Enter the customer id you want to delete</h2>
+    <h3>All Customers:</h3>
+    <form action="" method="post"> {% csrf_token %}
         <div class="container">
              <div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            {% for key in results.0 %}
-                                <th> {{ key }} </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for result in results %}
-                        <tr>
-                            {% for key, value in result.items %}
-                                <td> {{ value }} </td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
+                <table class="table table-bordered table-hover sortable" id='my'>
+                    <tr>
+                        <th scope="col" colspan="2" width="(80/x)%"> Member</th>
+                        <th scope="col" colspan="2" width="(80/x)%">Athlete</th>
+                        <th scope="col" colspan="2" width="(80/x)%">One-Time Customer</th>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>ID</td>
+                    </tr>
+                    <tr>
+                        <td>Herb Derp*</td>
+                        <td>654321</td>
+                        <td>Rachel Sand</td>
+                        <td>129382</td>
+                        <td>Henry Sze</td>
+                        <td>12345</td>
+                    </tr>
+                    <tr>
+                        <td>Tiffany Lin*</td>
+                        <td>392837</td>
+                        <td>Tiffany Pan</td>
+                        <td>239483</td>
+                        <td>John Wai</td>
+                        <td>22345</td>
+                    </tr>
+                    <tr>
+                        <td>Rachel Hi</td>
+                        <td>654124</td>
+                        <td>Yoshi Yamamoto</td>
+                        <td>472839</td>
+                        <td>Kelly Yeung</td>
+                        <td>32345</td>
+                    </tr>
+                    <tr>
+                        <td>Andy Ball</td>
+                        <td>392764</td>
+                        <td>Andy Yeung</td>
+                        <td>123456</td>
+                        <td>Nick Mellon</td>
+                        <td>42345</td>
+                    </tr>
+                    <tr>
+                        <td>Tim Fan</td>
+                        <td>625678</td>
+                        <td>John Doe</td>
+                        <td>123457</td>
+                        <td>Mark Mitchel*</td>
+                        <td>52345</td>
+                    </tr>
                 </table>
              </div>
         </div>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <div id="Delete-on-cascade">
+    <form method="post" action=""> {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit" value="Submit" class="btn btn-default">Submit</button>
+        <br>
+        <br>
     </form>
     </div>
 {% endblock %}

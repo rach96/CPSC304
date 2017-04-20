@@ -6,38 +6,55 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Delete operation: Delete an employee with a given ID </h1>
+    <h1>Delete: Delete an employee with a given ID </h1>
     <br>
-    <div id="Delete-on-cascade">
-    <h2 style="font-family: Arial;">Query 1: select the employee id you want to delete from clean</h2>
-    <form method="post" action=""> {% csrf_token %}
-        {{ form.as_p }}
-        <br>
-        <button type="submit" value="Submit">Submit</button>
-    </form>
+    <h2 style="font-family: Arial;">Select the Employee ID You Want to Delete From Clean</h2>
+    <h3>Employees Cleaning Rooms:</h3>
     <form action="" method="post"> {% csrf_token %}
         <div class="container">
              <div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            {% for key in results.0 %}
-                                <th> {{ key }} </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for result in results %}
-                        <tr>
-                            {% for key, value in result.items %}
-                                <td> {{ value }} </td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
+                <table class="table table-bordered table-hover sortable" id='my'>
+                    <tr>
+                        <th scope="col" width="(80/x)%">Employee Name</th>
+                        <th scope="col" width="(80/x)%">Employee ID</th>
+                        <th scope="col" width="(80/x)%">Room ID</th>
+                    </tr>
+                    <tr>
+                        <td>Amy Tang</td>
+                        <td>8147564912</td>
+                        <td>8452</td>
+                    </tr>
+                    <tr>
+                        <td>Ralph Sui</td>
+                        <td>8147135912</td>
+                        <td>8454</td>
+                    </tr>
+                    <tr>
+                        <td>Robert King</td>
+                        <td>8147346712</td>
+                        <td>8453</td>
+                    </tr>
+                    <tr>
+                        <td>Nichol Smith</td>
+                        <td>8147564346</td>
+                        <td>8455</td>
+                    </tr>
+                    <tr>
+                        <td>Sean Mendez</td>
+                        <td>8147534667</td>
+                        <td>8456</td>
+                    </tr>
                 </table>
              </div>
         </div>
+    </form>
+    <br>
+    <br>
+    <div id="Delete-on-cascade">
+    <form method="post" action=""> {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit" value="Submit" class="btn btn-default">Submit</button>
     </form>
     </div>
 {% endblock %}

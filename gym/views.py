@@ -28,7 +28,7 @@ from .forms import MyFormPage7
 from .forms import MyFormPage8
 
 from gym.query import my_custom_sql,my_sql_query_1,my_sql_query_2,my_sql_query_7,my_sql_query_5,my_sql_query_8,\
-    my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14
+    my_sql_query_9,my_sql_query_10,my_sql_query_11,my_sql_query_12,my_sql_query_13,my_sql_query_14,my_sql_query_7_insert
 
 def homepage(request):
     #my_custom_sql(request)
@@ -77,7 +77,7 @@ def page2(request):
             if JoinQuery == "Option 11":
                 results = my_sql_query_5(request)
                 data = {'results': results}
-            return render(request, 'gym/page2.html', data)
+            return render(request, 'gym/page10.html', data)
     print({'form': form})
     return render(request, 'gym/page2.html', {'form':form})
 
@@ -90,8 +90,11 @@ def page3(request):
             DivisionQuery = request.POST["DivisionQuery"]
             if DivisionQuery == "Option 10":
                 results = my_sql_query_7(request)
-                data = {'results': results}
-            return render(request, 'gym/page3.html', data)
+            if DivisionQuery == "Option 12":
+                results = my_sql_query_7_insert(request)
+
+            data = {'results': results}
+            return render(request, 'gym/page10.html', data)
     print({'form':form})
     return render(request, 'gym/page3.html', {'form': form})
 
@@ -106,7 +109,7 @@ def page4(request):
             if AggregationQuery == "Option 42":
                 results = my_sql_query_9(request)  # OPTION 2
             data = {'results': results}
-            return render(request, 'gym/page4.html', data)
+            return render(request, 'gym/page10.html', data)
     return render(request, 'gym/page4.html', {'form':form})
 
 #Nested Aggregation by Group-By
@@ -121,7 +124,7 @@ def page5(request):
             if NestedAggregationQuery == "Option 32":
                 results = my_sql_query_11(request)  # OPTION 2
             data = {'results': results}
-            return render(request, 'gym/page5.html', data)
+            return render(request, 'gym/page10.html', data)
     return render(request, 'gym/page5.html', {'form':form})
 
 #testPage
@@ -144,7 +147,7 @@ def page6(request):
                 results = my_sql_query_12(request,CustomerToDelete)
                 print(results)
             data = {'results': results}
-            return render(request, 'gym/page6.html', data)
+            return render(request, 'gym/page10.html', data)
     return render(request, 'gym/page6.html', {'form':form})
 
 #Delete ON CASCADE Operation
@@ -162,7 +165,7 @@ def page8(request):
                 except IntegrityError as e:
                     return render_to_response('gym/page9.html', {"message":e.__cause__})
             data = {'results': results}
-            return render(request, 'gym/page8.html', data)
+            return render(request, 'gym/page10.html', data)
     return render(request, 'gym/page8.html', {'form':form})
 
 #Update Operation
@@ -180,7 +183,7 @@ def page7(request):
                 except IntegrityError as e:
                     return render_to_response('gym/page9.html', {"message":e.__cause__})
             data = {'results': results}
-            return render(request, 'gym/page7.html', data)
+            return render(request, 'gym/page10.html', data)
     return render(request, 'gym/page7.html', {'form':form})
 
 

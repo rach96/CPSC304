@@ -6,40 +6,14 @@
 {% endblock %}
 
 {% block body %}
-
-        <h1>Select the types of equipment you want, and what attributes you would like displayed</h1>
-
-            <form action="" method="post"> {% csrf_token %}
-
-                {{ form.as_p}}
-
-
-                <button type="submit" class="btn btn-default">Submit</button>
-
-            </form>
-
-       <form action="" method="post"> {% csrf_token %}
-       <br>
-
-            <div class="container">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            {% for key in results.0 %}
-                                <th> {{ key }} </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for result in results %}
-                        <tr>
-                            {% for key, value in result.items %}
-                                <td> {{ value }} </td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+    <h1>Selection: Select the types of equipment you want, and what attributes you would like displayed</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+        <form action="" method="post"> {% csrf_token %}
+            {{ form.as_p}}
+            <button type="submit" class="btn btn-default">Submit</button>
         </form>
 {% endblock %}

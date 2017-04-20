@@ -7,37 +7,17 @@
 
 
 {% block body %}
-    <h1>Get all the customers who reserved every equipment</h1>
+    <h1>Division: Get all the customers who reserved every equipment</h1>
     <br>
     <h2 style="font-family: Arial;">Select the query to perform:</h2>
+    <br>
+    <br>
+    <br>
+    <br>
         <form method="post" action=""> {% csrf_token %}
             {{ form.as_p }}
-
+            <br>
             <button type="submit"  value="Submit" class="btn btn-default">Submit</button>
         </form>
 
-    <form method="post" action=""> {% csrf_token %}
-        <div class="container">
-             <div>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            {% for key in results.0 %}
-                                <th> {{ key }} </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for result in results %}
-                        <tr>
-                            {% for key, value in result.items %}
-                                <td> {{ value }} </td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-             </div>
-        </div>
-    </form>
 {% endblock %}

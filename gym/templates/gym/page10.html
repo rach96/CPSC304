@@ -6,9 +6,12 @@
 {% endblock %}
 
 {% block body %}
-
+    <br>
     <h1>Resulting Table from Query:</h1>
-    <h2>{{ field.id_for_label }}</h2>
+    <br>
+    <br>
+    <br>
+    <br>
 
 <form action="" method="post"> {% csrf_token %}
         <div class="container">
@@ -17,7 +20,7 @@
                     <thead>
                         <tr>
                             {% for key in results.0 %}
-                                <th> {{ key }} </th>
+                                <th scope="col" width="(80/x)%"> {{ key }} </th>
                             {% endfor %}
                         </tr>
                     </thead>
